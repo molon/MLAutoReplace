@@ -10,4 +10,7 @@
 
 @interface MLAutoReplace : NSObject
 
++ (id)sharedInstance;
+- (void)loadReplacePlist;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "MLAutoReplace.h"
 #import "VVKeyboardEventSender.h"
+#import "SettingWindowController.h"
 
 static MLAutoReplace *sharedPlugin;
 
@@ -15,6 +16,7 @@ static MLAutoReplace *sharedPlugin;
 
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, strong) NSDictionary *replaceGetters;
+@property (nonatomic, strong) SettingWindowController *settingWC;
 
 @end
 
@@ -29,6 +31,10 @@ static MLAutoReplace *sharedPlugin;
             sharedPlugin = [[self alloc] initWithBundle:plugin];
         });
     }
+}
+
++ (id)sharedInstance {
+    return sharedPlugin;
 }
 
 - (id)initWithBundle:(NSBundle *)plugin
@@ -67,12 +73,18 @@ static MLAutoReplace *sharedPlugin;
     }
 }
 
+- (SettingWindowController *)settingWC
+{
+	if (!_settingWC) {
+		_settingWC = [[SettingWindowController alloc] initWithWindowNibName:@"SettingWindowController"];
+	}
+	return _settingWC;
+}
 
-// Sample Action, for menu item:
+#warning 测试多次会图和。
 - (void)doMenuAction
 {
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Hello, World" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
-    [alert runModal];
+    [self.settingWC showWindow:self.settingWC];
 }
 
 - (void)dealloc
@@ -99,7 +111,7 @@ static MLAutoReplace *sharedPlugin;
     documentPath = [documentPath stringByAppendingString:@"/ReplaceGetter.plist"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:documentPath]){
         //找到工程下的默认plist
-        NSString *defaultReplaceGetterPlistPathOfBundle = [[NSBundle bundleForClass:[self class]]pathForResource:@"DefaultReplaceGetter" ofType:@"plist"];
+        NSString *defaultReplaceGetterPlistPathOfBundle = [self.bundle pathForResource:@"DefaultReplaceGetter" ofType:@"plist"];
         
         NSDictionary *defaultDict = [NSDictionary dictionaryWithContentsOfFile:defaultReplaceGetterPlistPathOfBundle];
         

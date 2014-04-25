@@ -10,6 +10,8 @@
 		36008DDC190AFDED004EFFD0 /* DefaultReplaceGetter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36008DDB190AFDED004EFFD0 /* DefaultReplaceGetter.plist */; };
 		3615FF83190AA1CC00CC9825 /* VVKeyboardEventSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615FF82190AA1CC00CC9825 /* VVKeyboardEventSender.m */; };
 		3615FF9A190ADC9A00CC9825 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615FF99190ADC9A00CC9825 /* NSString+PDRegex.m */; };
+		3652D0F2190B032900AA3A2F /* SettingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3652D0F1190B032900AA3A2F /* SettingWindowController.xib */; };
+		3652D0F5190B040500AA3A2F /* SettingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3652D0F4190B040500AA3A2F /* SettingWindowController.m */; };
 		36C1E664190A961800226CBF /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C1E663190A961800226CBF /* AppKit.framework */; };
 		36C1E666190A961800226CBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C1E665190A961800226CBF /* Foundation.framework */; };
 		36C1E66C190A961800226CBF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36C1E66A190A961800226CBF /* InfoPlist.strings */; };
@@ -24,6 +26,9 @@
 		3615FF82190AA1CC00CC9825 /* VVKeyboardEventSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVKeyboardEventSender.m; sourceTree = "<group>"; };
 		3615FF98190ADC9A00CC9825 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
 		3615FF99190ADC9A00CC9825 /* NSString+PDRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDRegex.m"; sourceTree = "<group>"; };
+		3652D0F1190B032900AA3A2F /* SettingWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingWindowController.xib; sourceTree = "<group>"; };
+		3652D0F3190B040500AA3A2F /* SettingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindowController.h; sourceTree = "<group>"; };
+		3652D0F4190B040500AA3A2F /* SettingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingWindowController.m; sourceTree = "<group>"; };
 		36C1E660190A961800226CBF /* MLAutoReplace.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLAutoReplace.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C1E663190A961800226CBF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		36C1E665190A961800226CBF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,6 +66,16 @@
 			path = KeyboardHelper;
 			sourceTree = "<group>";
 		};
+		3652D0F0190B032900AA3A2F /* SettingWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				3652D0F1190B032900AA3A2F /* SettingWindowController.xib */,
+				3652D0F3190B040500AA3A2F /* SettingWindowController.h */,
+				3652D0F4190B040500AA3A2F /* SettingWindowController.m */,
+			);
+			path = SettingWindowController;
+			sourceTree = "<group>";
+		};
 		36C1E657190A961800226CBF = {
 			isa = PBXGroup;
 			children = (
@@ -90,9 +105,10 @@
 		36C1E667190A961800226CBF /* MLAutoReplace */ = {
 			isa = PBXGroup;
 			children = (
-				36C1E67A190A987600226CBF /* Debug.h */,
+				3652D0F0190B032900AA3A2F /* SettingWindowController */,
 				3615FF80190AA1CC00CC9825 /* KeyboardHelper */,
 				36C1E676190A979200226CBF /* Category */,
+				36C1E67A190A987600226CBF /* Debug.h */,
 				36C1E66D190A961800226CBF /* MLAutoReplace.h */,
 				36C1E66E190A961800226CBF /* MLAutoReplace.m */,
 				36008DDB190AFDED004EFFD0 /* DefaultReplaceGetter.plist */,
@@ -176,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36008DDC190AFDED004EFFD0 /* DefaultReplaceGetter.plist in Resources */,
+				3652D0F2190B032900AA3A2F /* SettingWindowController.xib in Resources */,
 				36C1E66C190A961800226CBF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +206,7 @@
 			files = (
 				3615FF9A190ADC9A00CC9825 /* NSString+PDRegex.m in Sources */,
 				36C1E679190A97AC00226CBF /* NSTextView+Addition.m in Sources */,
+				3652D0F5190B040500AA3A2F /* SettingWindowController.m in Sources */,
 				36C1E67D190A988300226CBF /* NSString+Addition.m in Sources */,
 				3615FF83190AA1CC00CC9825 /* VVKeyboardEventSender.m in Sources */,
 				36C1E66F190A961800226CBF /* MLAutoReplace.m in Sources */,
