@@ -33,6 +33,10 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+- (void)dealloc
+{
+	DLOG(@"SettingWindowController dealloc");
+}
 
 - (IBAction)openGetterPlist:(id)sender {
     //打开替换getter的plist文件

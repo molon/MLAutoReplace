@@ -51,7 +51,7 @@ static MLAutoReplace *sharedPlugin;
     return self;
 }
 
-- (void) applicationDidFinishLaunching: (NSNotification*) noti {
+- (void)applicationDidFinishLaunching: (NSNotification*) noti {
     
     //加载替换配置文件
     [self loadReplacePlist];
@@ -76,12 +76,11 @@ static MLAutoReplace *sharedPlugin;
 - (SettingWindowController *)settingWC
 {
 	if (!_settingWC) {
-		_settingWC = [[SettingWindowController alloc] initWithWindowNibName:@"SettingWindowController"];
+		_settingWC = [[SettingWindowController alloc]initWithWindowNibName:@"SettingWindowController"];
 	}
 	return _settingWC;
 }
 
-#warning 测试多次会图和。
 - (void)doMenuAction
 {
     [self.settingWC showWindow:self.settingWC];
@@ -205,14 +204,27 @@ static MLAutoReplace *sharedPlugin;
 #pragma mark - auto input content and remove orig conten of current line
 - (void)removeCurrentLineContentAndInputContent:(NSString*)replaceContent ofTextView:(NSTextView*)textView
 {
+    //记录下光标位置，找到此行开头的位置
+    NSUInteger currentLocation = [textView locationOfCurrentLine];
+    NSUInteger tabBeginLocation = currentLocation;
+    
     //根据replaceContent里的内容检查是否需要自动Tab
     BOOL isNeedAutoTab = NO;
     if([replaceContent vv_matchesPatternRegexPattern:@"<#\\w+#>"]){
         isNeedAutoTab = YES;
+        
+        //找到第一个可tab的所在位置
+        NSArray *array = [replaceContent vv_stringsByExtractingGroupsUsingRegexPattern:@"(<#\\w+#>)"];
+        if (array.count<=0) {
+            return;
+        }
+        NSUInteger index = [replaceContent rangeOfString:array[0]].location;
+        if (index==NSNotFound) {
+            isNeedAutoTab = NO;
+        }else{
+            tabBeginLocation = currentLocation+index;
+        }
     }
-    
-    //记录下光标位置，找到此行开头的位置
-    NSUInteger currentLocation = [textView locationOfCurrentLine];
     
     //保存以前剪切板内容
     NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
@@ -249,7 +261,7 @@ static MLAutoReplace *sharedPlugin;
             
             if (isNeedAutoTab) {
                 //光标移到开始的位置
-                [textView setSelectedRange:NSMakeRange(currentLocation, 0)];
+                [textView setSelectedRange:NSMakeRange(tabBeginLocation, 0)];
                 //Send a 'tab' after insert the doc. For our lazy programmers. :)
                 [kes sendKeyCode:kVK_Tab];
             }
