@@ -44,6 +44,12 @@
     
     NSString *documentPath  = [documentDirectory stringByAppendingPathComponent:@"XCodePluginSetting/MLAutoReplace/ReplaceGetter.plist"];
     
+    if (![[NSFileManager defaultManager] fileExistsAtPath:documentPath]){
+        NSString *tips = [NSString stringWithFormat:@"Please check whether .plist file exists.\n\nThe path:\n%@",documentPath];
+        SHOM_SIMPLE_TIPS(tips);
+        return;
+    }
+    
     [[NSWorkspace sharedWorkspace]openFile:documentPath withApplication:kEditPlistApplicationName];
 }
 
@@ -53,11 +59,21 @@
     
     NSString *documentPath  = [documentDirectory stringByAppendingPathComponent:@"XCodePluginSetting/MLAutoReplace/ReplaceOther.plist"];
     
+    if (![[NSFileManager defaultManager] fileExistsAtPath:documentPath]){
+        NSString *tips = [NSString stringWithFormat:@"Please check whether .plist file exists.\n\nThe path:\n%@",documentPath];
+        SHOM_SIMPLE_TIPS(tips);
+        return;
+    }
+    
     [[NSWorkspace sharedWorkspace]openFile:documentPath withApplication:kEditPlistApplicationName];
 }
 
 - (IBAction)reloadPlist:(id)sender {
-    [[MLAutoReplace sharedInstance]loadReplacePlist];
+    if ([[MLAutoReplace sharedInstance]loadReplacePlist]) {
+        SHOM_SIMPLE_TIPS(@"Reload the data of .plist successfuly!");
+    }else{
+        SHOM_SIMPLE_TIPS(@"Reload the data of .plist failed!");
+    }
 }
 
 @end

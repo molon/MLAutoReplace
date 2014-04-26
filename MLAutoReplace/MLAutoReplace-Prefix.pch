@@ -12,3 +12,5 @@
     #import "NSString+PDRegex.h"
     #import "Debug.h"
 #endif
+
+#define SHOM_SIMPLE_TIPS(o) [[NSAlert alertWithMessageText:[NSString stringWithFormat:@"MLAutoReplace:\n%@",(o)] defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""]runModal];

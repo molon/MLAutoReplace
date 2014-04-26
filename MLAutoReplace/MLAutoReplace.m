@@ -16,6 +16,8 @@ static MLAutoReplace *sharedPlugin;
 
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, strong) NSDictionary *replaceGetters;
+@property (nonatomic, strong) NSArray *replaceOthers;
+
 @property (nonatomic, strong) SettingWindowController *settingWC;
 
 @end
@@ -54,7 +56,11 @@ static MLAutoReplace *sharedPlugin;
 - (void)applicationDidFinishLaunching: (NSNotification*) noti {
     
     //加载替换配置文件
-    [self loadReplacePlist];
+    if (![self loadReplacePlist]) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"MLAutoReplace: Load plist failed! Please retart Xcode to retry." defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+        [alert runModal];
+        return;
+    }
     
     //监控文本改变
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -92,22 +98,23 @@ static MLAutoReplace *sharedPlugin;
 }
 
 #pragma mark - load replace plist
-- (void)loadReplacePlist
+- (BOOL)loadReplacePlist
 {
     //加载替换getter的plist文件
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSString *documentPath  = [documentDirectory stringByAppendingPathComponent:@"XCodePluginSetting/MLAutoReplace/"];//添加储存的文件夹名字
+    documentDirectory  = [documentDirectory stringByAppendingPathComponent:@"XCodePluginSetting/MLAutoReplace/"];//添加储存的文件夹名字
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:documentPath]){
+    if (![[NSFileManager defaultManager] fileExistsAtPath:documentDirectory]){
         NSError *error = nil;
-        if(![[NSFileManager defaultManager] createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:&error]){
+        if(![[NSFileManager defaultManager] createDirectoryAtPath:documentDirectory withIntermediateDirectories:YES attributes:nil error:&error]){
             NSLog(@"%@",error);
-            return;
+            return NO;
         }
     }
     
-    documentPath = [documentPath stringByAppendingString:@"/ReplaceGetter.plist"];
+    //replaceGetters
+    NSString *documentPath = [documentDirectory stringByAppendingString:@"/ReplaceGetter.plist"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:documentPath]){
         //找到工程下的默认plist
         NSString *defaultReplaceGetterPlistPathOfBundle = [self.bundle pathForResource:@"DefaultReplaceGetter" ofType:@"plist"];
@@ -118,7 +125,7 @@ static MLAutoReplace *sharedPlugin;
             NSLog(@"归档到%@成功",documentPath);
         }else{
             NSLog(@"归档到%@失败,defaulPlist路径为%@",documentPath,defaultReplaceGetterPlistPathOfBundle);
-            return;
+            return NO;
         }
     }
     
@@ -137,11 +144,34 @@ static MLAutoReplace *sharedPlugin;
     
     self.replaceGetters = finalReplaceGetters;
 
+    
+    //replaceOthers
+    documentPath = [documentDirectory stringByAppendingString:@"/ReplaceOther.plist"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:documentPath]){
+        //找到工程下的默认plist,是数组包含字典的形式
+        //根目录数组是因为需要按顺序检测正则是否匹配，检测到了就无需匹配下面的
+
+        //找到工程下的默认plist
+        NSString *defaultReplaceOtherPlistPathOfBundle = [self.bundle pathForResource:@"DefaultReplaceOther" ofType:@"plist"];
+        
+        NSArray *defaultArray = [NSArray arrayWithContentsOfFile:defaultReplaceOtherPlistPathOfBundle];
+        
+        if ([defaultArray writeToFile:documentPath atomically:YES]) {
+            NSLog(@"归档到%@成功",documentPath);
+        }else{
+            NSLog(@"归档到%@失败,defaulPlist路径为%@",documentPath,defaultReplaceOtherPlistPathOfBundle);
+            return NO;
+        }
+    }
+    
+    self.replaceOthers = [NSArray arrayWithContentsOfFile:documentPath];
+    
+    return YES;
 }
 
 
 #pragma mark - text change monitor
-- (void) textStorageDidChange:(NSNotification *)noti {
+- (void)textStorageDidChange:(NSNotification *)noti {
     
     if ([[noti object] isKindOfClass:[NSTextView class]]) {
         NSTextView *textView = (NSTextView *)[noti object];
@@ -152,53 +182,121 @@ static MLAutoReplace *sharedPlugin;
             return;
         }
         
-        //check if the input is getter
-        //eg:- (UIView *)view///
-        if(![currentLine vv_matchesPatternRegexPattern:@"^\\s*-\\s*\\(\\s*\\w+\\s*\\*?\\s*\\)\\s*\\w+\\s*/{3}$"]){
+        //getter replace
+        if ([self checkAndReplaceGetterWithCurrentLine:currentLine ofTextView:textView]) {
             return;
         }
         
-        //get the return type of getter
-        NSArray *array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\(\\s*(\\w+\\s*\\*?)\\s*\\)"];
-        if (array.count<=0) {
-            return;
-        }
-        NSString *type = [array[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
-        
-        //get the name of getter
-        array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\)\\s*(\\w+)\\s*/{3}$"];
-        if (array.count<=0) {
-            return;
-        }
-        NSString *name = array[0];
-        
-        NSLog(@"%@,%@",type,name);
-        
-        //根据type找到对应的替换文本
-        NSString *replaceContent =  nil;
-        
-        NSString * const defaultReplaceGetterOfPointer = @"{\n\tif (!_<name>) {\n\t\t<#custom#>\n\t}\n\treturn _<name>;\n}\n";
-        NSString * const defaultReplaceGetterOfScalar = @"{\n\t<#custom#>\n}\n";
-        if (self.replaceGetters[type]) {
-            replaceContent =  [self.replaceGetters[type] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
-        }else{
-            NSString *replaceGetter = defaultReplaceGetterOfScalar;
-            if ([type hasSuffix:@"*"]||[type isEqualToString:@"id"]) {
-                if ([type hasSuffix:@"*"]) {
-                    type = [[type substringToIndex:type.length-1] stringByAppendingString:@" *"];
-                }
-                replaceGetter = defaultReplaceGetterOfPointer;
+        //other replace
+        [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
+    }
+}
+
+#pragma mark - check and replace
+- (BOOL)checkAndReplaceGetterWithCurrentLine:(NSString*)currentLine  ofTextView:(NSTextView*)textView
+{
+    //eg:- (UIView *)view///
+    if(![currentLine vv_matchesPatternRegexPattern:@"^\\s*-\\s*\\(\\s*\\w+\\s*\\*?\\s*\\)\\s*\\w+\\s*/{3}$"]){
+        return NO;
+    }
+    
+    //get the return type of getter
+    NSArray *array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\(\\s*(\\w+\\s*\\*?)\\s*\\)"];
+    if (array.count<=0) {
+        return NO;
+    }
+    NSString *type = [array[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    //get the name of getter
+    array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\)\\s*(\\w+)\\s*/{3}$"];
+    if (array.count<=0) {
+        return NO;
+    }
+    NSString *name = array[0];
+    
+    NSLog(@"%@,%@",type,name);
+    
+    //根据type找到对应的替换文本
+    NSString *replaceContent =  nil;
+    
+    NSString * const defaultReplaceGetterOfPointer = @"{\n\tif (!_<name>) {\n\t\t<#custom#>\n\t}\n\treturn _<name>;\n}\n";
+    NSString * const defaultReplaceGetterOfScalar = @"{\n\t<#custom#>\n}\n";
+    if (self.replaceGetters[type]) {
+        replaceContent =  [self.replaceGetters[type] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
+    }else{
+        NSString *replaceGetter = defaultReplaceGetterOfScalar;
+        if ([type hasSuffix:@"*"]||[type isEqualToString:@"id"]) {
+            if ([type hasSuffix:@"*"]) {
+                type = [[type substringToIndex:type.length-1] stringByAppendingString:@" *"];
             }
-            replaceContent = [[NSString stringWithFormat:@"- (%@)<name>\n%@",type,replaceGetter] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
+            replaceGetter = defaultReplaceGetterOfPointer;
+        }
+        replaceContent = [[NSString stringWithFormat:@"- (%@)<name>\n%@",type,replaceGetter] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
+    }
+    
+    if ([NSString IsNilOrEmpty:replaceContent]) {
+        return NO;
+    }
+    
+    //按键以完成替换
+    [self removeCurrentLineContentAndInputContent:replaceContent ofTextView:textView];
+    
+    return YES;
+}
+
+- (BOOL)checkAndReplaceOtherWithCurrentLine:(NSString*)currentLine  ofTextView:(NSTextView*)textView
+{
+    //对于@s/,@w/,@a/作为默认的。如果存储的没找到就放在最后面，检测这三个默认的
+//    NSArray * const defaultArray = @[
+//                              @{
+//                                  @"regex":@"^\\s*@s/$",
+//                                  @"replaceContent": @"@property (nonatomic, strong) <#custom#>"
+//                                  }
+//                              ,
+//                              @{
+//                                  @"regex":@"^\\s*@w/$",
+//                                  @"replaceContent": @"@property (nonatomic, weak) <#custom#>"
+//                                  }
+//                              ,
+//                              @{
+//                                  @"regex":@"^\\s*@a/$",
+//                                  @"replaceContent": @"@property (nonatomic, assign) <#custom#>"
+//                                  }
+//                              ,
+//                              ];
+    //找到工程下的默认plist,默认的三个存储在这里面
+    NSString *defaultReplaceOtherPlistPathOfBundle = [self.bundle pathForResource:@"DefaultReplaceOther" ofType:@"plist"];
+    
+    NSArray *defaultArray = [NSArray arrayWithContentsOfFile:defaultReplaceOtherPlistPathOfBundle];
+
+    
+    NSMutableArray *finalReplaceOthers = [self.replaceOthers mutableCopy];
+    if (finalReplaceOthers) {
+        [finalReplaceOthers addObjectsFromArray:defaultArray];
+    }else{
+        finalReplaceOthers = [defaultArray mutableCopy];
+    }
+    for (NSDictionary *aRegexDict in finalReplaceOthers) {
+        //找到正则
+        NSString *regex = aRegexDict[@"regex"];
+        //找到替换内容
+        NSString *replaceContent = aRegexDict[@"replaceContent"];
+        if ([NSString IsNilOrEmpty:regex]||[NSString IsNilOrEmpty:replaceContent]) {
+            continue;
         }
         
-        if ([NSString IsNilOrEmpty:replaceContent]) {
-            return;
+        //检测是否匹配
+        if(![currentLine vv_matchesPatternRegexPattern:regex]){
+            continue;
         }
-        
         //按键以完成替换
         [self removeCurrentLineContentAndInputContent:replaceContent ofTextView:textView];
+        return YES;
+        
     }
+    
+    return NO;
+
 }
 
 #pragma mark - auto input content and remove orig conten of current line
@@ -239,10 +337,12 @@ static MLAutoReplace *sharedPlugin;
     BOOL useDvorakLayout = [VVKeyboardEventSender useDvorakLayout];
     
     [kes beginKeyBoradEvents];
+    
+    //光标移到此行结束的位置,这样才能一次把一行都删去
+    [textView setSelectedRange:NSMakeRange([textView endLocationOfCurrentLine]+1, 0)];
     //删掉当前这一行光标位置前面的内容 Command+Delete
     [kes sendKeyCode:kVK_Delete withModifierCommand:YES alt:NO shift:NO control:NO];
-    //删掉当前这一行光标位置后面的内容 Control+K
-    [kes sendKeyCode:kVK_ANSI_K withModifierCommand:NO alt:NO shift:NO control:YES];
+    
     //粘贴剪切板内容
     NSInteger kKeyVCode = useDvorakLayout?kVK_ANSI_Period : kVK_ANSI_V;
     [kes sendKeyCode:kKeyVCode withModifierCommand:YES alt:NO shift:NO control:NO];
@@ -260,7 +360,7 @@ static MLAutoReplace *sharedPlugin;
             [pasteBoard setString:originPBString forType:NSStringPboardType];
             
             if (isNeedAutoTab) {
-                //光标移到开始的位置
+                //光标移到tab开始的位置
                 [textView setSelectedRange:NSMakeRange(tabBeginLocation, 0)];
                 //Send a 'tab' after insert the doc. For our lazy programmers. :)
                 [kes sendKeyCode:kVK_Tab];

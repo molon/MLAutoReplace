@@ -18,6 +18,7 @@
 		36C1E66F190A961800226CBF /* MLAutoReplace.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C1E66E190A961800226CBF /* MLAutoReplace.m */; };
 		36C1E679190A97AC00226CBF /* NSTextView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C1E678190A97AC00226CBF /* NSTextView+Addition.m */; };
 		36C1E67D190A988300226CBF /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C1E67C190A988300226CBF /* NSString+Addition.m */; };
+		36EF899B190BA929003C7336 /* DefaultReplaceOther.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EF899A190BA929003C7336 /* DefaultReplaceOther.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		36C1E67A190A987600226CBF /* Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		36C1E67B190A988300226CBF /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		36C1E67C190A988300226CBF /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
+		36EF899A190BA929003C7336 /* DefaultReplaceOther.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceOther.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				36C1E66D190A961800226CBF /* MLAutoReplace.h */,
 				36C1E66E190A961800226CBF /* MLAutoReplace.m */,
 				36008DDB190AFDED004EFFD0 /* DefaultReplaceGetter.plist */,
+				36EF899A190BA929003C7336 /* DefaultReplaceOther.plist */,
 				36C1E668190A961800226CBF /* Supporting Files */,
 			);
 			path = MLAutoReplace;
@@ -193,6 +196,7 @@
 			files = (
 				36008DDC190AFDED004EFFD0 /* DefaultReplaceGetter.plist in Resources */,
 				3652D0F2190B032900AA3A2F /* SettingWindowController.xib in Resources */,
+				36EF899B190BA929003C7336 /* DefaultReplaceOther.plist in Resources */,
 				36C1E66C190A961800226CBF /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,8 @@
 
 //get begin location of current curse location line
 - (NSUInteger)locationOfCurrentLine;
+
+- (NSUInteger)endLocationOfCurrentLine;
 //get text of current curse location line
 - (NSString *)textOfCurrentLine;
 

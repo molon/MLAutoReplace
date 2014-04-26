@@ -59,6 +59,30 @@
     }
     
     return 0;
+}
+
+- (NSUInteger)endLocationOfCurrentLine
+{
+    NSString *string = self.textStorage.string;
+    if ([NSString IsNilOrEmpty:string]) {
+        return 0;
+    }
+    
+    NSInteger curseLocation = [self currentCurseLocation];
+    NSRange range = NSMakeRange(0, curseLocation);
+    
+    NSUInteger thisLineBeginLocation = [string rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch range:range].location;
+    thisLineBeginLocation = (thisLineBeginLocation==NSNotFound)?0:thisLineBeginLocation+1;
+    
+    range = NSMakeRange(thisLineBeginLocation, string.length-thisLineBeginLocation);
+    
+    NSUInteger thisLineEndLocation = [string rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSLiteralSearch range:range].location;
+    thisLineEndLocation = (thisLineEndLocation==NSNotFound)?string.length-1:thisLineEndLocation-1;
+    if (thisLineEndLocation<string.length) {
+        return thisLineEndLocation;
+    }
+    
+    return 0;
     
 }
 

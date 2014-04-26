@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>regex</key>
+		<string>^\s*@s/$</string>
+		<key>replaceContent</key>
+		<string>@property (nonatomic, strong) &lt;#custom#&gt;</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*@w/$</string>
+		<key>replaceContent</key>
+		<string>@property (nonatomic, weak) &lt;#custom#&gt;</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*@a/$</string>
+		<key>replaceContent</key>
+		<string>@property (nonatomic, assign) &lt;#custom#&gt;</string>
+	</dict>
+</array>
+</plist>
