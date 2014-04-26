@@ -39,7 +39,7 @@ NSString * const kPrefixKeyOfUserDefault = @"com.molon.";
             }else{
                 //这里简单做下默认赋值吧，方便
                 if ([key isEqualToString:@"isUseAutoReIndent"]) {
-                    [self setValue:@YES forKeyPath:key];
+                    self.isUseAutoReIndent = YES;
                 }
             }
             

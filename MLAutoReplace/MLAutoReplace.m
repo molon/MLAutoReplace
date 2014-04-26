@@ -25,6 +25,8 @@ static MLAutoReplace *sharedPlugin;
 
 @property (nonatomic, strong) SettingWindowController *settingWC;
 
+@property (nonatomic, strong) dispatch_queue_t textCheckQueue;
+
 @end
 
 @implementation MLAutoReplace
@@ -49,6 +51,8 @@ static MLAutoReplace *sharedPlugin;
     if (self = [super init]) {
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
+        
+        self.textCheckQueue = dispatch_queue_create("com.molon.textCheckQueue", NULL);
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidFinishLaunching:)
@@ -200,7 +204,10 @@ static MLAutoReplace *sharedPlugin;
         finalReplaceGetters[[key stringByReplacingOccurrencesOfString:@" " withString:@""]] = value;
     }
     
-    self.replaceGetters = finalReplaceGetters;
+    //简单做下同步吧
+    @synchronized(self.replaceGetters){
+        self.replaceGetters = finalReplaceGetters;
+    }
     
     
     //replaceOthers
@@ -222,7 +229,10 @@ static MLAutoReplace *sharedPlugin;
         }
     }
     
-    self.replaceOthers = [NSArray arrayWithContentsOfFile:documentPath];
+    //简单做下同步吧
+    @synchronized(self.replaceOthers){
+        self.replaceOthers = [NSArray arrayWithContentsOfFile:documentPath];
+    }
     
     return YES;
 }
@@ -233,29 +243,42 @@ static MLAutoReplace *sharedPlugin;
         return;
     }
     
-    NSTextView *textView = (NSTextView *)[noti object];
-    
-    NSString *currentLine = [textView textOfCurrentLine];
-    //empty should be ignored
-    if ([NSString IsNilOrEmpty:currentLine]) {
-        return;
-    }
-    
-    //getter replace
-    if ([self checkAndReplaceGetterWithCurrentLine:currentLine ofTextView:textView]) {
-        return;
-    }
-    //other replace
-    [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
+    //在后台线程里做。
+    dispatch_async(self.textCheckQueue, ^{
+        NSTextView *textView = (NSTextView *)[noti object];
+        
+        NSString *currentLine = [textView textOfCurrentLine];
+        //empty should be ignored
+        if ([NSString IsNilOrEmpty:currentLine]) {
+            return;
+        }
+        
+        //getter replace
+        if ([self checkAndReplaceGetterWithCurrentLine:currentLine ofTextView:textView]) {
+            return;
+        }
+        //other replace
+        [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
+    });
 }
 
 #pragma mark - check and replace
 - (BOOL)checkAndReplaceGetterWithCurrentLine:(NSString*)currentLine  ofTextView:(NSTextView*)textView
 {
     //eg:- (UIView *)view///
+    static NSString *lastCurrentLine = nil;
     if(![currentLine vv_matchesPatternRegexPattern:@"^\\s*-\\s*\\(\\s*\\w+\\s*\\*?\\s*\\)\\s*\\w+\\s*/{3}$"]){
+        lastCurrentLine = currentLine;
         return NO;
     }
+    
+    //这里用来保证是一个字一个字把最后三个/敲出来的，而不是复制啊，或者从中间敲的
+    if(![[lastCurrentLine stringByAppendingString:@"/"]isEqualToString:currentLine]||[textView endLocationOfCurrentLine]+1!=[textView currentCurseLocation]){
+        lastCurrentLine = currentLine;
+        return NO;
+    }
+    lastCurrentLine = currentLine;
+    
     
     //get the return type of getter
     NSArray *array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\(\\s*(\\w+\\s*\\*?)\\s*\\)"];
@@ -278,8 +301,13 @@ static MLAutoReplace *sharedPlugin;
     
     NSString * const defaultReplaceGetterOfPointer = @"{\n\tif (!_<name>) {\n\t\t<#custom#>\n\t}\n\treturn _<name>;\n}\n";
     NSString * const defaultReplaceGetterOfScalar = @"{\n\t<#custom#>\n}\n";
-    if (self.replaceGetters[type]) {
-        replaceContent =  [self.replaceGetters[type] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
+    
+    NSString * replaceGetter = nil;
+    @synchronized(self.replaceGetters){ //简单同步
+        replaceGetter = self.replaceGetters[type];
+    }
+    if (replaceGetter) {
+        replaceContent =  [replaceGetter stringByReplacingOccurrencesOfString:@"<name>" withString:name];
     }else{
         NSString *replaceGetter = defaultReplaceGetterOfScalar;
         if ([type hasSuffix:@"*"]||[type isEqualToString:@"id"]) {
@@ -326,8 +354,10 @@ static MLAutoReplace *sharedPlugin;
     
     NSArray *defaultArray = [NSArray arrayWithContentsOfFile:defaultReplaceOtherPlistPathOfBundle];
     
-    
-    NSMutableArray *finalReplaceOthers = [self.replaceOthers mutableCopy];
+    NSMutableArray *finalReplaceOthers = nil;
+    @synchronized(self.replaceOthers){ //简单同步
+        finalReplaceOthers = [self.replaceOthers mutableCopy];
+    }
     if (finalReplaceOthers) {
         [finalReplaceOthers addObjectsFromArray:defaultArray];
     }else{
@@ -389,47 +419,51 @@ static MLAutoReplace *sharedPlugin;
     [pasteBoard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
     [pasteBoard setString:replaceContent forType:NSStringPboardType];
     
-    
-    VVKeyboardEventSender *kes = [[VVKeyboardEventSender alloc] init];
-    BOOL useDvorakLayout = [VVKeyboardEventSender useDvorakLayout];
-    
-    [kes beginKeyBoradEvents];
-    
-    //光标移到此行结束的位置,这样才能一次把一行都删去
-    [textView setSelectedRange:NSMakeRange([textView endLocationOfCurrentLine]+1, 0)];
-    //删掉当前这一行光标位置前面的内容 Command+Delete
-    [kes sendKeyCode:kVK_Delete withModifierCommand:YES alt:NO shift:NO control:NO];
-    
-    //粘贴剪切板内容
-    NSInteger kKeyVCode = useDvorakLayout?kVK_ANSI_Period : kVK_ANSI_V;
-    [kes sendKeyCode:kKeyVCode withModifierCommand:YES alt:NO shift:NO control:NO];
-    
-    //这个按键用来模拟下上个命令执行完毕了，然后需要还原剪切板 ,按键是同步进行的,所以接到F20的时候应该之前的都执行完毕了
-    [kes sendKeyCode:kVK_F20];
-    
-    static id eventMonitor = nil;
-    eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask handler:^NSEvent *(NSEvent *incomingEvent) {
-        if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_F20) {
-            [NSEvent removeMonitor:eventMonitor];
-            eventMonitor = nil;
-            
-            //还原剪切板
-            [pasteBoard setString:originPBString forType:NSStringPboardType];
-            
-            if (isNeedAutoTab) {
-                //光标移到tab开始的位置
-                [textView setSelectedRange:NSMakeRange(tabBeginLocation, 0)];
-                //Send a 'tab' after insert the doc. For our lazy programmers. :)
-                [kes sendKeyCode:kVK_Tab];
+    dispatch_block_t block = ^{
+        VVKeyboardEventSender *kes = [[VVKeyboardEventSender alloc] init];
+        BOOL useDvorakLayout = [VVKeyboardEventSender useDvorakLayout];
+        
+        [kes beginKeyBoradEvents];
+        
+        //光标移到此行结束的位置,这样才能一次把一行都删去
+        [textView setSelectedRange:NSMakeRange([textView endLocationOfCurrentLine]+1, 0)];
+        //删掉当前这一行光标位置前面的内容 Command+Delete
+        [kes sendKeyCode:kVK_Delete withModifierCommand:YES alt:NO shift:NO control:NO];
+        
+        //粘贴剪切板内容
+        NSInteger kKeyVCode = useDvorakLayout?kVK_ANSI_Period : kVK_ANSI_V;
+        [kes sendKeyCode:kKeyVCode withModifierCommand:YES alt:NO shift:NO control:NO];
+        
+        //这个按键用来模拟下上个命令执行完毕了，然后需要还原剪切板 ,按键是同步进行的,所以接到F20的时候应该之前的都执行完毕了
+        [kes sendKeyCode:kVK_F20];
+        
+        static id eventMonitor = nil;
+        eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask handler:^NSEvent *(NSEvent *incomingEvent) {
+            if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_F20) {
+                [NSEvent removeMonitor:eventMonitor];
+                eventMonitor = nil;
+                
+                //还原剪切板
+                [pasteBoard setString:originPBString forType:NSStringPboardType];
+                
+                if (isNeedAutoTab) {
+                    //光标移到tab开始的位置
+                    [textView setSelectedRange:NSMakeRange(tabBeginLocation, 0)];
+                    //Send a 'tab' after insert the doc. For our lazy programmers. :)
+                    [kes sendKeyCode:kVK_Tab];
+                }
+                
+                [kes endKeyBoradEvents];
+                
+                //让默认行为无效
+                return nil;
             }
-            
-            [kes endKeyBoradEvents];
-            
-            //让默认行为无效
-            return nil;
-        }
-        return incomingEvent;
-    }];
+            return incomingEvent;
+        }];
+    };
+    
+    //键盘操作放到主线程去做
+    dispatch_async(dispatch_get_main_queue(), block);
     
 }
 
