@@ -10,4 +10,6 @@
 
 @interface SettingWindowController : NSWindowController
 
+- (IBAction)reloadPlist:(id)sender;
+
 @end

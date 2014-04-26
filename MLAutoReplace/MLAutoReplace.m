@@ -118,6 +118,10 @@ static MLAutoReplace *sharedPlugin;
             
             //让默认行为无效
             return nil;
+        }else if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_ANSI_Backslash
+                  && (incomingEvent.modifierFlags&kCGEventFlagMaskControl)&&(incomingEvent.modifierFlags&kCGEventFlagMaskCommand)&&(incomingEvent.modifierFlags&kCGEventFlagMaskAlternate)) {
+            //Control+Alt+Command+|  快捷键重载plist
+            [self.settingWC reloadPlist:nil]; //简单调用下WC的方法即可
         }
         return incomingEvent;
     }];
