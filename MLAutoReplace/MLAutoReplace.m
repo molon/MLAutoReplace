@@ -12,11 +12,15 @@
 
 static MLAutoReplace *sharedPlugin;
 
+#define kSourceTextViewClass NSClassFromString(@"DVTSourceTextView")
+
 @interface MLAutoReplace()
 
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, strong) NSDictionary *replaceGetters;
 @property (nonatomic, strong) NSArray *replaceOthers;
+
+@property (nonatomic, strong) id eventMonitor;
 
 @property (nonatomic, strong) SettingWindowController *settingWC;
 
@@ -62,12 +66,57 @@ static MLAutoReplace *sharedPlugin;
         return;
     }
     
+    //添加按键检测 ,检测shift+command+|，用来自动去处理当前自动re-indent
+    //当前的弊端是如果用户打开XCode之后从来木有编辑过一次程序，那就没有用
+    self.eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask handler:^NSEvent *(NSEvent *incomingEvent) {
+        if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_ANSI_Backslash
+            && (incomingEvent.modifierFlags&kCGEventFlagMaskShift)&&(incomingEvent.modifierFlags&kCGEventFlagMaskCommand)) {
+            
+            NSTextView *textView = nil;
+            //找到源码编辑窗口
+            for (NSView *subView in [((NSView*)incomingEvent.window.contentView) allSubviews]) {
+                if ([subView isKindOfClass:kSourceTextViewClass]) {
+                    textView = (NSTextView*)subView;
+                }
+            }
+            
+            if (!textView||![incomingEvent.window.firstResponder isEqual:textView]) {
+                //没找到或者当前的第一响应View不是源代码编辑窗口就忽略了。
+                return incomingEvent;
+            }
+            DLOG(@"按了shift+command+|,window:%@，windowNumber:%ld，并且执行自动re-indent",incomingEvent.window,incomingEvent.windowNumber);
+            
+            NSUInteger locationOfCurrentLine = [textView locationOfCurrentLine];
+            
+            VVKeyboardEventSender *kes = [[VVKeyboardEventSender alloc] init];
+            [kes beginKeyBoradEvents];
+            
+            //全选
+            [kes sendKeyCode:kVK_ANSI_A withModifierCommand:YES alt:NO shift:NO control:NO];
+            //ReIndent
+            [kes sendKeyCode:kVK_ANSI_Backslash withModifierCommand:NO alt:NO shift:YES control:YES];
+            
+            [kes endKeyBoradEvents];
+            
+            //光标移到原本所在行的头部位置，隔个0.1秒再触发,其实最终有可能不是目标位置，因为re-indent之后文本会被调整
+            //差不多就成了
+            double delayInSeconds = 0.1f;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [textView setSelectedRange:NSMakeRange(locationOfCurrentLine, 0)];
+            });
+            
+            //让默认行为无效
+            return nil;
+        }
+        return incomingEvent;
+    }];
+    
     //监控文本改变
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textStorageDidChange:)
                                                  name:NSTextDidChangeNotification
                                                object:nil];
-    
     
     // Sample Menu Item:
     NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Window"];
@@ -95,6 +144,9 @@ static MLAutoReplace *sharedPlugin;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [NSEvent removeMonitor:self.eventMonitor];
+    self.eventMonitor = nil;
 }
 
 #pragma mark - load replace plist
@@ -143,14 +195,14 @@ static MLAutoReplace *sharedPlugin;
     }
     
     self.replaceGetters = finalReplaceGetters;
-
+    
     
     //replaceOthers
     documentPath = [documentDirectory stringByAppendingString:@"/ReplaceOther.plist"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:documentPath]){
         //找到工程下的默认plist,是数组包含字典的形式
         //根目录数组是因为需要按顺序检测正则是否匹配，检测到了就无需匹配下面的
-
+        
         //找到工程下的默认plist
         NSString *defaultReplaceOtherPlistPathOfBundle = [self.bundle pathForResource:@"DefaultReplaceOther" ofType:@"plist"];
         
@@ -169,27 +221,26 @@ static MLAutoReplace *sharedPlugin;
     return YES;
 }
 
-
 #pragma mark - text change monitor
 - (void)textStorageDidChange:(NSNotification *)noti {
-    
-    if ([[noti object] isKindOfClass:[NSTextView class]]) {
-        NSTextView *textView = (NSTextView *)[noti object];
-        
-        NSString *currentLine = [textView textOfCurrentLine];
-        //empty should be ignored
-        if ([NSString IsNilOrEmpty:currentLine]) {
-            return;
-        }
-        
-        //getter replace
-        if ([self checkAndReplaceGetterWithCurrentLine:currentLine ofTextView:textView]) {
-            return;
-        }
-        
-        //other replace
-        [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
+    if (![[noti object] isKindOfClass:kSourceTextViewClass]) {
+        return;
     }
+    
+    NSTextView *textView = (NSTextView *)[noti object];
+    
+    NSString *currentLine = [textView textOfCurrentLine];
+    //empty should be ignored
+    if ([NSString IsNilOrEmpty:currentLine]) {
+        return;
+    }
+    
+    //getter replace
+    if ([self checkAndReplaceGetterWithCurrentLine:currentLine ofTextView:textView]) {
+        return;
+    }
+    //other replace
+    [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
 }
 
 #pragma mark - check and replace
@@ -247,28 +298,28 @@ static MLAutoReplace *sharedPlugin;
 - (BOOL)checkAndReplaceOtherWithCurrentLine:(NSString*)currentLine  ofTextView:(NSTextView*)textView
 {
     //对于@s/,@w/,@a/作为默认的。如果存储的没找到就放在最后面，检测这三个默认的
-//    NSArray * const defaultArray = @[
-//                              @{
-//                                  @"regex":@"^\\s*@s/$",
-//                                  @"replaceContent": @"@property (nonatomic, strong) <#custom#>"
-//                                  }
-//                              ,
-//                              @{
-//                                  @"regex":@"^\\s*@w/$",
-//                                  @"replaceContent": @"@property (nonatomic, weak) <#custom#>"
-//                                  }
-//                              ,
-//                              @{
-//                                  @"regex":@"^\\s*@a/$",
-//                                  @"replaceContent": @"@property (nonatomic, assign) <#custom#>"
-//                                  }
-//                              ,
-//                              ];
+    //    NSArray * const defaultArray = @[
+    //                              @{
+    //                                  @"regex":@"^\\s*@s/$",
+    //                                  @"replaceContent": @"@property (nonatomic, strong) <#custom#>"
+    //                                  }
+    //                              ,
+    //                              @{
+    //                                  @"regex":@"^\\s*@w/$",
+    //                                  @"replaceContent": @"@property (nonatomic, weak) <#custom#>"
+    //                                  }
+    //                              ,
+    //                              @{
+    //                                  @"regex":@"^\\s*@a/$",
+    //                                  @"replaceContent": @"@property (nonatomic, assign) <#custom#>"
+    //                                  }
+    //                              ,
+    //                              ];
     //找到工程下的默认plist,默认的三个存储在这里面
     NSString *defaultReplaceOtherPlistPathOfBundle = [self.bundle pathForResource:@"DefaultReplaceOther" ofType:@"plist"];
     
     NSArray *defaultArray = [NSArray arrayWithContentsOfFile:defaultReplaceOtherPlistPathOfBundle];
-
+    
     
     NSMutableArray *finalReplaceOthers = [self.replaceOthers mutableCopy];
     if (finalReplaceOthers) {
@@ -296,7 +347,7 @@ static MLAutoReplace *sharedPlugin;
     }
     
     return NO;
-
+    
 }
 
 #pragma mark - auto input content and remove orig conten of current line
@@ -373,7 +424,7 @@ static MLAutoReplace *sharedPlugin;
         }
         return incomingEvent;
     }];
-
+    
 }
 
 @end

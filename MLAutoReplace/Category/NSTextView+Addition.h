@@ -10,6 +10,8 @@
 
 @interface NSTextView (Addition)
 
+- (NSInteger)currentCurseLocation;
+
 //get begin location of current curse location line
 - (NSUInteger)locationOfCurrentLine;
 
