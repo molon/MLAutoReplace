@@ -9,12 +9,13 @@ You can input common getter quickly.
 You can custom other replacer with regex.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceOther.gif)  
 
-You need add your own syntax of getter replacer.  
-![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/addReplaceGetter.gif)  
-
 You can use `Shift+Command+\` to auto re-indent all the current edit file's source.  
 
 ##getter replacer
+
+You need add your own syntax of getter replacer.  
+![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/addReplaceGetter.gif)  
+
 `<name>` means the property name.  
 `<#xxx#>` means need to input,it is recommended to provide
 
