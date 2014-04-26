@@ -19,6 +19,9 @@
 		36C1E66F190A961800226CBF /* MLAutoReplace.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C1E66E190A961800226CBF /* MLAutoReplace.m */; };
 		36C1E679190A97AC00226CBF /* NSTextView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C1E678190A97AC00226CBF /* NSTextView+Addition.m */; };
 		36C1E67D190A988300226CBF /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C1E67C190A988300226CBF /* NSString+Addition.m */; };
+		36EEAF0A190C03510036D07F /* ClassProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EEAF04190C03510036D07F /* ClassProperties.m */; };
+		36EEAF0B190C03510036D07F /* MolonUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EEAF06190C03510036D07F /* MolonUserDefault.m */; };
+		36EEAF0C190C03510036D07F /* ObjcRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EEAF09190C03510036D07F /* ObjcRuntime.m */; };
 		36EF899B190BA929003C7336 /* DefaultReplaceOther.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36EF899A190BA929003C7336 /* DefaultReplaceOther.plist */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +49,12 @@
 		36C1E67A190A987600226CBF /* Debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		36C1E67B190A988300226CBF /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
 		36C1E67C190A988300226CBF /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
+		36EEAF03190C03510036D07F /* ClassProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassProperties.h; sourceTree = "<group>"; };
+		36EEAF04190C03510036D07F /* ClassProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassProperties.m; sourceTree = "<group>"; };
+		36EEAF05190C03510036D07F /* MolonUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MolonUserDefault.h; sourceTree = "<group>"; };
+		36EEAF06190C03510036D07F /* MolonUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MolonUserDefault.m; sourceTree = "<group>"; };
+		36EEAF08190C03510036D07F /* ObjcRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcRuntime.h; sourceTree = "<group>"; };
+		36EEAF09190C03510036D07F /* ObjcRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcRuntime.m; sourceTree = "<group>"; };
 		36EF899A190BA929003C7336 /* DefaultReplaceOther.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceOther.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +119,7 @@
 		36C1E667190A961800226CBF /* MLAutoReplace */ = {
 			isa = PBXGroup;
 			children = (
+				36EEAF02190C03510036D07F /* UserDefault */,
 				3652D0F0190B032900AA3A2F /* SettingWindowController */,
 				3615FF80190AA1CC00CC9825 /* KeyboardHelper */,
 				36C1E676190A979200226CBF /* Category */,
@@ -146,6 +156,27 @@
 				369F72F4190BF9850077F874 /* NSView+MLRecursiveSubviews.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		36EEAF02190C03510036D07F /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				36EEAF03190C03510036D07F /* ClassProperties.h */,
+				36EEAF04190C03510036D07F /* ClassProperties.m */,
+				36EEAF05190C03510036D07F /* MolonUserDefault.h */,
+				36EEAF06190C03510036D07F /* MolonUserDefault.m */,
+				36EEAF07190C03510036D07F /* ObjcRuntime */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		36EEAF07190C03510036D07F /* ObjcRuntime */ = {
+			isa = PBXGroup;
+			children = (
+				36EEAF08190C03510036D07F /* ObjcRuntime.h */,
+				36EEAF09190C03510036D07F /* ObjcRuntime.m */,
+			);
+			path = ObjcRuntime;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,12 +245,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				369F72F5190BF9850077F874 /* NSView+MLRecursiveSubviews.m in Sources */,
+				36EEAF0B190C03510036D07F /* MolonUserDefault.m in Sources */,
 				3615FF9A190ADC9A00CC9825 /* NSString+PDRegex.m in Sources */,
 				36C1E679190A97AC00226CBF /* NSTextView+Addition.m in Sources */,
+				36EEAF0C190C03510036D07F /* ObjcRuntime.m in Sources */,
 				3652D0F5190B040500AA3A2F /* SettingWindowController.m in Sources */,
 				36C1E67D190A988300226CBF /* NSString+Addition.m in Sources */,
 				3615FF83190AA1CC00CC9825 /* VVKeyboardEventSender.m in Sources */,
 				36C1E66F190A961800226CBF /* MLAutoReplace.m in Sources */,
+				36EEAF0A190C03510036D07F /* ClassProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

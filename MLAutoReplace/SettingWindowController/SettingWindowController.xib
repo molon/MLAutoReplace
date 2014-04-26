@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SettingWindowController">
             <connections>
+                <outlet property="useAutoReIndentCheckBox" destination="Eqw-RO-Xt3" id="mLJ-Aa-mG1"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="2Ag-96-65E"/>
             </connections>
         </customObject>
@@ -13,14 +14,14 @@
         <customObject id="-3" userLabel="Application"/>
         <window title="MLAutoReplace" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
-            <rect key="contentRect" x="640" y="340" width="184" height="167"/>
+            <rect key="contentRect" x="640" y="340" width="226" height="210"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="184" height="167"/>
+                <rect key="frame" x="0.0" y="0.0" width="226" height="210"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t5Q-fd-kUO">
-                        <rect key="frame" x="20" y="23" width="151" height="32"/>
+                        <rect key="frame" x="33" y="66" width="151" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Reload .plist Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eTT-B2-E1J">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -31,7 +32,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VDp-VD-ZCB">
-                        <rect key="frame" x="19" y="109" width="152" height="32"/>
+                        <rect key="frame" x="32" y="152" width="152" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Open Getter .plist" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Bjr-JL-c3X">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -42,7 +43,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzS-J4-BMv">
-                        <rect key="frame" x="19" y="67" width="151" height="32"/>
+                        <rect key="frame" x="32" y="110" width="151" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Open Other .plist" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8GX-HP-YSk">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -50,6 +51,17 @@
                         </buttonCell>
                         <connections>
                             <action selector="openOtherPlist:" target="-2" id="Ted-6R-AxI"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eqw-RO-Xt3">
+                        <rect key="frame" x="17" y="28" width="190" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Shift+CMD+| to Re-Indent" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mUa-7I-GCa">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="autoReIndentSwitch:" target="-2" id="BgO-Nd-1yh"/>
                         </connections>
                     </button>
                 </subviews>

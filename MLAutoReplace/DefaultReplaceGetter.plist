@@ -11,5 +11,50 @@
 	return _&lt;name&gt;;
 }
 </string>
+	<key>UIButton*</key>
+	<string>- (UIButton *)&lt;name&gt;
+{
+    if (!_&lt;name&gt;) {
+		UIButton *button = [[UIButton alloc]init];
+        [button setTitle:@&quot;&lt;#title#&gt;&quot; forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(&lt;#action#&gt;) forControlEvents:UIControlEventTouchUpInside];
+
+        &lt;#custom#&gt;
+
+        _&lt;name&gt; = button;
+    }
+    return _&lt;name&gt;;
+}
+</string>
+	<key>UILabel*</key>
+	<string>- (UILabel *)&lt;name&gt;
+{
+    if (!_&lt;name&gt;) {
+        UILabel* label = [[UILabel alloc]init];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = [UIColor blackColor];
+        label.font = [UIFont systemFontOfSize:14.0f];
+
+        &lt;#custom#&gt;
+
+        _&lt;name&gt; = label;
+    }
+    return _&lt;name&gt;;
+}
+</string>
+	<key>UIImageView*</key>
+	<string>- (UIImageView *)&lt;name&gt;
+{
+    if (!_&lt;name&gt;) {
+		UIImageView *imageView = [[UIImageView alloc]init];
+        imageView.image = [UIImage imageNamed:@&quot;&lt;#imageName#&gt;&quot;];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        &lt;#custom#&gt;
+
+        _&lt;name&gt; = imageView;
+    }
+    return _&lt;name&gt;;
+}
+</string>
 </dict>
 </plist>

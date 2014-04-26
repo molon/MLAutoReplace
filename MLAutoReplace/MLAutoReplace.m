@@ -9,6 +9,7 @@
 #import "MLAutoReplace.h"
 #import "VVKeyboardEventSender.h"
 #import "SettingWindowController.h"
+#import "MolonUserDefault.h"
 
 static MLAutoReplace *sharedPlugin;
 
@@ -71,6 +72,11 @@ static MLAutoReplace *sharedPlugin;
     self.eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask handler:^NSEvent *(NSEvent *incomingEvent) {
         if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_ANSI_Backslash
             && (incomingEvent.modifierFlags&kCGEventFlagMaskShift)&&(incomingEvent.modifierFlags&kCGEventFlagMaskCommand)) {
+            
+            //如果设置里不需要此功能则返回
+            if (![MolonUserDefault shareInstance].isUseAutoReIndent) {
+                return incomingEvent;
+            }
             
             NSTextView *textView = nil;
             //找到源码编辑窗口
