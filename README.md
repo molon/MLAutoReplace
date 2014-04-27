@@ -1,7 +1,7 @@
 MLAutoReplace
 =============
 
-XCode plugin 
+XCode plugin , Thands for [VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode).  
 
 You can input common getter quickly.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceGetter.gif)  
