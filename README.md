@@ -11,7 +11,7 @@ You can custom other replacer with regex.
 
 You can use `Shift+Command+\` to auto re-indent all source of the current edit file.  
 
-##getter replacer
+##Getter replacer
 
 You need add your own common syntax to the getter replacer.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/addReplaceGetter.gif)  
@@ -39,7 +39,7 @@ Exmple:
 You must reload .plist file with shortcut `control+option+command+\` after editing and saving it.   
 You can also reload it with the `Reload .plist Data` button in MLAutoReplace window.   
 
-##regex replacer
+##Regex replacer
 
 Exmple:  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/regex.png)  
