@@ -10,7 +10,10 @@
 
 @interface MolonUserDefault : NSObject
 
-@property (nonatomic,assign) BOOL isUseAutoReIndent;
+/**
+ *  这里需要继承做初始化赋值，即为默认值
+ */
+- (void)initValues;
 
 + (instancetype)shareInstance;
 

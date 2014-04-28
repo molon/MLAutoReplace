@@ -8,7 +8,7 @@
 
 #import "SettingWindowController.h"
 #import "MLAutoReplace.h"
-#import "MolonUserDefault.h"
+#import "MLAutoReplaceUserDefault.h"
 
 
 #define kEditPlistApplicationName @"Xcode"
@@ -36,7 +36,7 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    self.useAutoReIndentCheckBox.state = [MolonUserDefault shareInstance].isUseAutoReIndent;
+    self.useAutoReIndentCheckBox.state = [MLAutoReplaceUserDefault shareInstance].isUseAutoReIndent;
 }
 
 - (void)dealloc
@@ -84,7 +84,7 @@
 
 - (IBAction)autoReIndentSwitch:(id)sender {
     NSButton *checkBox = (NSButton*)sender;
-    [MolonUserDefault shareInstance].isUseAutoReIndent = checkBox.state;
+    [MLAutoReplaceUserDefault shareInstance].isUseAutoReIndent = checkBox.state;
 }
 
 @end

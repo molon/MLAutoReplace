@@ -9,7 +9,7 @@
 #import "MLAutoReplace.h"
 #import "VVKeyboardEventSender.h"
 #import "SettingWindowController.h"
-#import "MolonUserDefault.h"
+#import "MLAutoReplaceUserDefault.h"
 
 static MLAutoReplace *sharedPlugin;
 
@@ -78,7 +78,7 @@ static MLAutoReplace *sharedPlugin;
             && (incomingEvent.modifierFlags&kCGEventFlagMaskShift)&&(incomingEvent.modifierFlags&kCGEventFlagMaskCommand)) {
             
             //如果设置里不需要此功能则返回
-            if (![MolonUserDefault shareInstance].isUseAutoReIndent) {
+            if (![MLAutoReplaceUserDefault shareInstance].isUseAutoReIndent) {
                 return incomingEvent;
             }
             

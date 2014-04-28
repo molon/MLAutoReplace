@@ -17,17 +17,25 @@ NSString * const kPrefixKeyOfUserDefault = @"com.molon.";
     static MolonUserDefault *_shareInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _shareInstance = [[MolonUserDefault alloc]init];
+        _shareInstance = [[[self class] alloc]init];
     });
     return _shareInstance;
+}
+
+- (void)initValues
+{
+    //这里需要继承做初始化赋值，即为默认值
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        //赋默认值
+        [self initValues];
+        
         //获取属性
-        NSDictionary *properties = [[ClassProperties shareInstance]getPropertiesOfClass:[self class]];
+        NSDictionary *properties = [[ClassProperties shareInstance]getPropertiesOfClass:[self class] untilSuperClass:[MolonUserDefault class]];
         
         //遍历初始赋值
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
@@ -36,11 +44,6 @@ NSString * const kPrefixKeyOfUserDefault = @"com.molon.";
             id object = [def objectForKey:[NSString stringWithFormat:@"%@%@",kPrefixKeyOfUserDefault,key]];
             if (object) {
                 [self setValue:object forKey:key];
-            }else{
-                //这里简单做下默认赋值吧，方便
-                if ([key isEqualToString:@"isUseAutoReIndent"]) {
-                    self.isUseAutoReIndent = YES;
-                }
             }
             
             //对应添加KVO

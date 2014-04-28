@@ -48,8 +48,7 @@
 {
     NSString *clsname =  [NSString stringWithFormat:@"%@-%@",NSStringFromClass(cls),NSStringFromClass(supercls)];
     if (!self.dict[clsname]) {
-        NSAssert([cls isSubclassOfClass:supercls]&&![NSStringFromClass(cls) isEqualToString:NSStringFromClass(supercls)], @"getPropertiesOfClass:untilSuperClass:父类传递错误");
-        
+        NSAssert([cls isSubclassOfClass:supercls]&&![NSStringFromClass(cls) isEqualToString:NSStringFromClass(supercls)], ([NSString stringWithFormat:@"getPropertiesOfClass:untilSuperClass:父类传递错误.当前类:%@,父类:%@",NSStringFromClass(cls),NSStringFromClass(supercls)]));
         Class supersupercls = [supercls superclass]; //因为要包括当前supercls 所以需要如此
         if (!supersupercls) {
             supersupercls = [NSObject class];
