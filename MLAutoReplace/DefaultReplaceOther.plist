@@ -20,5 +20,83 @@
 		<key>replaceContent</key>
 		<string>@property (nonatomic, assign) &lt;#custom#&gt;</string>
 	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*@c/$</string>
+		<key>replaceContent</key>
+		<string>@property (nonatomic, copy) NSString *&lt;#custom#&gt;</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*-\s*\(\s*id\s*\)\s*init\s*//$</string>
+		<key>replaceContent</key>
+		<string>- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        &lt;#statements#&gt;
+    }
+    return self;
+}</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*-\s*\(\s*instancetype\s*\)\s*init\s*//$</string>
+		<key>replaceContent</key>
+		<string>- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        &lt;#statements#&gt;
+    }
+    return self;
+}</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*--ts$</string>
+		<key>replaceContent</key>
+		<string>- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @&quot;&lt;#CellIdentifier#&gt;&quot;;
+    &lt;#UITableViewCell#&gt; *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = &lt;#[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]#&gt;;
+    }
+    
+    &lt;#custom#&gt;
+    
+    return cell;
+}
+</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*--td$</string>
+		<key>replaceContent</key>
+		<string>- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return &lt;#44.0f#&gt;;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    &lt;#custom#&gt;
+}
+</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*--bl$</string>
+		<key>replaceContent</key>
+		<string>typedef &lt;#returnType#&gt;(^&lt;#name#&gt;)(&lt;#arguments#&gt;);</string>
+	</dict>
 </array>
 </plist>

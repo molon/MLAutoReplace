@@ -303,7 +303,6 @@ static MLAutoReplace *sharedPlugin;
     //根据type找到对应的替换文本
     NSString *replaceContent =  nil;
     
-    NSString * const defaultReplaceGetterOfPointer = @"{\n\tif (!_<name>) {\n\t\t<#custom#>\n\t}\n\treturn _<name>;\n}\n";
     NSString * const defaultReplaceGetterOfScalar = @"{\n\t<#custom#>\n}\n";
     
     NSString * replaceGetter = nil;
@@ -315,10 +314,15 @@ static MLAutoReplace *sharedPlugin;
     }else{
         NSString *replaceGetter = defaultReplaceGetterOfScalar;
         if ([type hasSuffix:@"*"]||[type isEqualToString:@"id"]) {
+            NSString * const defaultReplaceGetterOfPointer = @"{\n\tif (!_<name>) {%@\n\t\t<#custom#>\n\t}\n\treturn _<name>;\n}\n";
+            NSString *otherContent = @"";
             if ([type hasSuffix:@"*"]) {
+                NSString *typeWithoutStar = [[type substringToIndex:type.length-1]stringByReplacingOccurrencesOfString:@" " withString:@""];
+                otherContent = [NSString stringWithFormat:@"\n\t\t_<name> = [%@ new];",typeWithoutStar];
+                
                 type = [[type substringToIndex:type.length-1] stringByAppendingString:@" *"];
             }
-            replaceGetter = defaultReplaceGetterOfPointer;
+            replaceGetter = [NSString stringWithFormat:defaultReplaceGetterOfPointer,otherContent];
         }
         replaceContent = [[NSString stringWithFormat:@"- (%@)<name>\n%@",type,replaceGetter] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
     }

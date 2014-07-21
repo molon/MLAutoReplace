@@ -2,26 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>id</key>
-	<string>- (id)&lt;name&gt;
-{
-	if (!_&lt;name&gt;) {
-		&lt;#custon#&gt;
-	}
-	return _&lt;name&gt;;
-}
-</string>
 	<key>UIButton*</key>
 	<string>- (UIButton *)&lt;name&gt;
 {
     if (!_&lt;name&gt;) {
 		UIButton *button = [[UIButton alloc]init];
-        [button setTitle:@&quot;&lt;#title#&gt;&quot; forState:UIControlStateNormal];
+		[button setTitle:@&quot;&lt;#title#&gt;&quot; forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(&lt;#action#&gt;) forControlEvents:UIControlEventTouchUpInside];
 
         &lt;#custom#&gt;
 
         _&lt;name&gt; = button;
+    }
+    return _&lt;name&gt;;
+}
+</string>
+	<key>UIImageView*</key>
+	<string>- (UIImageView *)&lt;name&gt;
+{
+    if (!_&lt;name&gt;) {
+		UIImageView *imageView = [[UIImageView alloc]init];
+        imageView.image = [UIImage imageNamed:@&quot;&lt;#imageName#&gt;&quot;];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        &lt;#custom#&gt;
+
+        _&lt;name&gt; = imageView;
     }
     return _&lt;name&gt;;
 }
@@ -42,18 +48,17 @@
     return _&lt;name&gt;;
 }
 </string>
-	<key>UIImageView*</key>
-	<string>- (UIImageView *)&lt;name&gt;
+	<key>UITableView*</key>
+	<string>- (UITableView *)&lt;name&gt;
 {
-    if (!_&lt;name&gt;) {
-		UIImageView *imageView = [[UIImageView alloc]init];
-        imageView.image = [UIImage imageNamed:@&quot;&lt;#imageName#&gt;&quot;];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        &lt;#custom#&gt;
+	if (!_&lt;name&gt;) {
+		UITableView *tableView = [[UITableView alloc]init];
+        tableView.delegate = self;
+        tableView.dataSource = self;
 
-        _&lt;name&gt; = imageView;
-    }
-    return _&lt;name&gt;;
+        _&lt;name&gt; = tableView;
+	}
+	return _&lt;name&gt;;
 }
 </string>
 </dict>
