@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		36008DDC190AFDED004EFFD0 /* DefaultReplaceGetter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36008DDB190AFDED004EFFD0 /* DefaultReplaceGetter.plist */; };
-		3615FF83190AA1CC00CC9825 /* VVKeyboardEventSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615FF82190AA1CC00CC9825 /* VVKeyboardEventSender.m */; };
+		3615FF83190AA1CC00CC9825 /* MLKeyboardEventSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615FF82190AA1CC00CC9825 /* MLKeyboardEventSender.m */; };
 		3615FF9A190ADC9A00CC9825 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615FF99190ADC9A00CC9825 /* NSString+PDRegex.m */; };
 		36193426190E2AC5002B493D /* MLAutoReplaceUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 36193425190E2AC5002B493D /* MLAutoReplaceUserDefault.m */; };
 		3652D0F2190B032900AA3A2F /* SettingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3652D0F1190B032900AA3A2F /* SettingWindowController.xib */; };
@@ -28,8 +28,8 @@
 
 /* Begin PBXFileReference section */
 		36008DDB190AFDED004EFFD0 /* DefaultReplaceGetter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceGetter.plist; sourceTree = "<group>"; };
-		3615FF81190AA1CC00CC9825 /* VVKeyboardEventSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VVKeyboardEventSender.h; sourceTree = "<group>"; };
-		3615FF82190AA1CC00CC9825 /* VVKeyboardEventSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VVKeyboardEventSender.m; sourceTree = "<group>"; };
+		3615FF81190AA1CC00CC9825 /* MLKeyboardEventSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKeyboardEventSender.h; sourceTree = "<group>"; };
+		3615FF82190AA1CC00CC9825 /* MLKeyboardEventSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKeyboardEventSender.m; sourceTree = "<group>"; };
 		3615FF98190ADC9A00CC9825 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
 		3615FF99190ADC9A00CC9825 /* NSString+PDRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDRegex.m"; sourceTree = "<group>"; };
 		36193424190E2AC5002B493D /* MLAutoReplaceUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLAutoReplaceUserDefault.h; path = UserDefault/MLAutoReplaceUserDefault.h; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 		3615FF80190AA1CC00CC9825 /* KeyboardHelper */ = {
 			isa = PBXGroup;
 			children = (
-				3615FF81190AA1CC00CC9825 /* VVKeyboardEventSender.h */,
-				3615FF82190AA1CC00CC9825 /* VVKeyboardEventSender.m */,
+				3615FF81190AA1CC00CC9825 /* MLKeyboardEventSender.h */,
+				3615FF82190AA1CC00CC9825 /* MLKeyboardEventSender.m */,
 			);
 			path = KeyboardHelper;
 			sourceTree = "<group>";
@@ -257,7 +257,7 @@
 				3652D0F5190B040500AA3A2F /* SettingWindowController.m in Sources */,
 				36C1E67D190A988300226CBF /* NSString+Addition.m in Sources */,
 				36193426190E2AC5002B493D /* MLAutoReplaceUserDefault.m in Sources */,
-				3615FF83190AA1CC00CC9825 /* VVKeyboardEventSender.m in Sources */,
+				3615FF83190AA1CC00CC9825 /* MLKeyboardEventSender.m in Sources */,
 				36C1E66F190A961800226CBF /* MLAutoReplace.m in Sources */,
 				36EEAF0A190C03510036D07F /* ClassProperties.m in Sources */,
 			);

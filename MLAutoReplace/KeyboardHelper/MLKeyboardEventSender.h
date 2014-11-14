@@ -1,5 +1,5 @@
 //
-//  VVKeyboardEventSender.h
+//  MLKeyboardEventSender.h
 //  VVDocumenter-Xcode
 //
 //  Created by 王 巍 on 13-7-26.
@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <Carbon/Carbon.h>
 
-
-@interface VVKeyboardEventSender : NSObject
+/**
+ *  改名是为了防止和VVDocumenter插件类名冲突
+ */
+@interface MLKeyboardEventSender : NSObject
 -(void) beginKeyBoradEvents;
 -(void) sendKeyCode:(NSInteger)keyCode;
 -(void) sendKeyCode:(NSInteger)keyCode withModifierCommand:(BOOL)command

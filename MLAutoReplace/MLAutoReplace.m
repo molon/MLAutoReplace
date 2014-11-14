@@ -7,7 +7,7 @@
 //
 
 #import "MLAutoReplace.h"
-#import "VVKeyboardEventSender.h"
+#import "MLKeyboardEventSender.h"
 #import "SettingWindowController.h"
 #import "MLAutoReplaceUserDefault.h"
 
@@ -98,7 +98,7 @@ static MLAutoReplace *sharedPlugin;
             
             NSUInteger locationOfCurrentLine = [textView locationOfCurrentLine];
             
-            VVKeyboardEventSender *kes = [[VVKeyboardEventSender alloc] init];
+            MLKeyboardEventSender *kes = [[MLKeyboardEventSender alloc] init];
             [kes beginKeyBoradEvents];
             
             //全选
@@ -428,8 +428,8 @@ static MLAutoReplace *sharedPlugin;
     [pasteBoard setString:replaceContent forType:NSStringPboardType];
     
     dispatch_block_t block = ^{
-        VVKeyboardEventSender *kes = [[VVKeyboardEventSender alloc] init];
-        BOOL useDvorakLayout = [VVKeyboardEventSender useDvorakLayout];
+        MLKeyboardEventSender *kes = [[MLKeyboardEventSender alloc] init];
+        BOOL useDvorakLayout = [MLKeyboardEventSender useDvorakLayout];
         
         [kes beginKeyBoradEvents];
         

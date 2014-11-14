@@ -1,21 +1,21 @@
 //
-//  VVKeyboardEventSender.m
+//  MLKeyboardEventSender.m
 //  VVDocumenter-Xcode
 //
 //  Created by 王 巍 on 13-7-26.
 //  Copyright (c) 2013年 OneV's Den. All rights reserved.
 //
 
-#import "VVKeyboardEventSender.h"
+#import "MLKeyboardEventSender.h"
 
-@interface VVKeyboardEventSender()
+@interface MLKeyboardEventSender()
 {
     CGEventSourceRef _source;
     CGEventTapLocation _location;
 }
 @end
 
-@implementation VVKeyboardEventSender
+@implementation MLKeyboardEventSender
 -(void) beginKeyBoradEvents
 {
     _source = CGEventSourceCreate(kCGEventSourceStateCombinedSessionState);
