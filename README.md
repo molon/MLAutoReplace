@@ -3,6 +3,8 @@ MLAutoReplace
 
 XCode plugin , Thanks for [VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode).  
 
+This is only for XCode 5. [XCode6](https://github.com/molon/MLAutoReplace_XCode6)
+
 You can input common getter quickly.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceGetter.gif)  
 
