@@ -25,7 +25,7 @@ static MLAutoReplace *sharedPlugin;
 
 @property (nonatomic, strong) SettingWindowController *settingWC;
 
-@property (nonatomic, strong) dispatch_queue_t textCheckQueue;
+//@property (nonatomic, strong) dispatch_queue_t textCheckQueue;
 
 @end
 
@@ -52,7 +52,7 @@ static MLAutoReplace *sharedPlugin;
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
         
-        self.textCheckQueue = dispatch_queue_create("com.molon.textCheckQueue", NULL);
+//        self.textCheckQueue = dispatch_queue_create("com.molon.textCheckQueue", NULL);
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidFinishLaunching:)
@@ -248,7 +248,7 @@ static MLAutoReplace *sharedPlugin;
     }
     
     //在后台线程里做。
-    dispatch_async(self.textCheckQueue, ^{
+//    dispatch_async(self.textCheckQueue, ^{
         NSTextView *textView = (NSTextView *)[noti object];
         
         NSString *currentLine = [textView textOfCurrentLine];
@@ -263,7 +263,7 @@ static MLAutoReplace *sharedPlugin;
         }
         //other replace
         [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
-    });
+//    });
 }
 
 #pragma mark - check and replace
@@ -421,6 +421,10 @@ static MLAutoReplace *sharedPlugin;
     
     //保存以前剪切板内容
     NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+    if (!pasteBoard) {
+        return;
+    }
+    
     NSString *originPBString = [pasteBoard stringForType:NSPasteboardTypeString];
     
     //复制要添加内容到剪切板
