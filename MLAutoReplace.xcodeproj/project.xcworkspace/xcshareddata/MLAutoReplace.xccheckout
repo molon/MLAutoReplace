@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3C68BEDC-F984-4B4E-8506-CDFAF19D6630</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MLAutoReplace</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>07FBC96E-3112-4BD1-AD6F-28A3AFFB55EA</key>
+		<string>https://github.com/molon/MLAutoReplace.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MLAutoReplace.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>07FBC96E-3112-4BD1-AD6F-28A3AFFB55EA</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/molon/MLAutoReplace.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>07FBC96E-3112-4BD1-AD6F-28A3AFFB55EA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>07FBC96E-3112-4BD1-AD6F-28A3AFFB55EA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MLAutoReplace</string>
+		</dict>
+	</array>
+</dict>
+</plist>
