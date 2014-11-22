@@ -152,7 +152,7 @@ static MLAutoReplace *sharedPlugin;
 
 - (void)doMenuAction
 {
-    [self.settingWC showWindow:self.settingWC];
+    [self.settingWC showWindow:nil];
 }
 
 - (void)dealloc
