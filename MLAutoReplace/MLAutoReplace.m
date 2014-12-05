@@ -52,7 +52,7 @@ static MLAutoReplace *sharedPlugin;
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
         
-//        self.textCheckQueue = dispatch_queue_create("com.molon.textCheckQueue", NULL);
+        //        self.textCheckQueue = dispatch_queue_create("com.molon.textCheckQueue", NULL);
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidFinishLaunching:)
@@ -144,10 +144,10 @@ static MLAutoReplace *sharedPlugin;
 
 - (SettingWindowController *)settingWC
 {
-	if (!_settingWC) {
-		_settingWC = [[SettingWindowController alloc]initWithWindowNibName:@"SettingWindowController"];
-	}
-	return _settingWC;
+    if (!_settingWC) {
+        _settingWC = [[SettingWindowController alloc]initWithWindowNibName:@"SettingWindowController"];
+    }
+    return _settingWC;
 }
 
 - (void)doMenuAction
@@ -248,22 +248,22 @@ static MLAutoReplace *sharedPlugin;
     }
     
     //在后台线程里做。
-//    dispatch_async(self.textCheckQueue, ^{
-        NSTextView *textView = (NSTextView *)[noti object];
-        
-        NSString *currentLine = [textView textOfCurrentLine];
-        //empty should be ignored
-        if ([NSString IsNilOrEmpty:currentLine]) {
-            return;
-        }
-        
-        //getter replace
-        if ([self checkAndReplaceGetterWithCurrentLine:currentLine ofTextView:textView]) {
-            return;
-        }
-        //other replace
-        [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
-//    });
+    //    dispatch_async(self.textCheckQueue, ^{
+    NSTextView *textView = (NSTextView *)[noti object];
+    
+    NSString *currentLine = [textView textOfCurrentLine];
+    //empty should be ignored
+    if ([NSString IsNilOrEmpty:currentLine]) {
+        return;
+    }
+    
+    //getter replace
+    if ([self checkAndReplaceGetterWithCurrentLine:currentLine ofTextView:textView]) {
+        return;
+    }
+    //other replace
+    [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
+    //    });
 }
 
 #pragma mark - check and replace

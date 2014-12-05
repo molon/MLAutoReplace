@@ -13,6 +13,7 @@
 		36193426190E2AC5002B493D /* MLAutoReplaceUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 36193425190E2AC5002B493D /* MLAutoReplaceUserDefault.m */; };
 		3652D0F2190B032900AA3A2F /* SettingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3652D0F1190B032900AA3A2F /* SettingWindowController.xib */; };
 		3652D0F5190B040500AA3A2F /* SettingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3652D0F4190B040500AA3A2F /* SettingWindowController.m */; };
+		3679F77A1A31B4E600A0289E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3679F7791A31B4E600A0289E /* README.md */; };
 		369F72F5190BF9850077F874 /* NSView+MLRecursiveSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 369F72F4190BF9850077F874 /* NSView+MLRecursiveSubviews.m */; };
 		36C1E664190A961800226CBF /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C1E663190A961800226CBF /* AppKit.framework */; };
 		36C1E666190A961800226CBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36C1E665190A961800226CBF /* Foundation.framework */; };
@@ -37,6 +38,7 @@
 		3652D0F1190B032900AA3A2F /* SettingWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingWindowController.xib; sourceTree = "<group>"; };
 		3652D0F3190B040500AA3A2F /* SettingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindowController.h; sourceTree = "<group>"; };
 		3652D0F4190B040500AA3A2F /* SettingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingWindowController.m; sourceTree = "<group>"; };
+		3679F7791A31B4E600A0289E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		369F72F3190BF9850077F874 /* NSView+MLRecursiveSubviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+MLRecursiveSubviews.h"; sourceTree = "<group>"; };
 		369F72F4190BF9850077F874 /* NSView+MLRecursiveSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+MLRecursiveSubviews.m"; sourceTree = "<group>"; };
 		36C1E660190A961800226CBF /* MLAutoReplace.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLAutoReplace.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 		36C1E657190A961800226CBF = {
 			isa = PBXGroup;
 			children = (
+				3679F7791A31B4E600A0289E /* README.md */,
 				36C1E667190A961800226CBF /* MLAutoReplace */,
 				36C1E662190A961800226CBF /* Frameworks */,
 				36C1E661190A961800226CBF /* Products */,
@@ -255,6 +258,7 @@
 				36C1E679190A97AC00226CBF /* NSTextView+Addition.m in Sources */,
 				36EEAF0C190C03510036D07F /* ObjcRuntime.m in Sources */,
 				3652D0F5190B040500AA3A2F /* SettingWindowController.m in Sources */,
+				3679F77A1A31B4E600A0289E /* README.md in Sources */,
 				36C1E67D190A988300226CBF /* NSString+Addition.m in Sources */,
 				36193426190E2AC5002B493D /* MLAutoReplaceUserDefault.m in Sources */,
 				3615FF83190AA1CC00CC9825 /* MLKeyboardEventSender.m in Sources */,

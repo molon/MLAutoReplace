@@ -3,15 +3,14 @@ MLAutoReplace
 
 XCode plugin , Thanks for [VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode).  
 
-This is only for XCode 5. [XCode6 -> goto the link](https://github.com/molon/MLAutoReplace_XCode6)
+##Overview
+You can use shortcut key `Shift+Command+\` to auto re-indent all source of the current edit file.  
 
 You can input common getter quickly.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceGetter.gif)  
 
 You can custom other replacer with regex.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceOther.gif)  
-
-You can use `Shift+Command+\` to auto re-indent all source of the current edit file.  
 
 ##Getter replacer
 
