@@ -12,6 +12,15 @@ You can input common getter quickly.
 You can custom other replacer with regex.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceOther.gif)  
 
+##Re-Indent
+
+Just can be quickly re-intent. 
+
+If you find that press `Shift+Command+\` does nothing.
+Please ensure that the shortcut key setting of Re-Intent is default.
+![re-intent shortcut key setting](https://raw.githubusercontent.com/molon/MLAutoReplace/master/re-intent-setting.png) 
+
+
 ##Getter replacer
 
 You need add your own common syntax to the getter replacer.  
