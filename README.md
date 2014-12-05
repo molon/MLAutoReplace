@@ -18,7 +18,7 @@ You can input common getter quickly.
 
 Just can be quickly re-intent. 
 
-If you find that press `Shift+Command+\` does nothing.
+If you find that press `Shift+Command+\` does nothing.   
 Please ensure that the shortcut key setting of Re-Intent is default.
 ![re-intent shortcut key setting](https://raw.githubusercontent.com/molon/MLAutoReplace/master/re-intent-setting.png) 
 
