@@ -1,0 +1,394 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		367DEA141A20F39C00A65D14 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 367DEA131A20F39C00A65D14 /* AppKit.framework */; };
+		367DEA161A20F39C00A65D14 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 367DEA151A20F39C00A65D14 /* Foundation.framework */; };
+		367DEA1B1A20F39C00A65D14 /* MLAutoReplace.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA1A1A20F39C00A65D14 /* MLAutoReplace.xcscheme */; };
+		367DEA431A20F3B800A65D14 /* NSString+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA261A20F3B800A65D14 /* NSString+Addition.m */; };
+		367DEA441A20F3B800A65D14 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA281A20F3B800A65D14 /* NSString+PDRegex.m */; };
+		367DEA451A20F3B800A65D14 /* NSTextView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA2A1A20F3B800A65D14 /* NSTextView+Addition.m */; };
+		367DEA471A20F3B800A65D14 /* DefaultReplaceGetter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA2E1A20F3B800A65D14 /* DefaultReplaceGetter.plist */; };
+		367DEA481A20F3B800A65D14 /* DefaultReplaceOther.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA2F1A20F3B800A65D14 /* DefaultReplaceOther.plist */; };
+		367DEA491A20F3B800A65D14 /* MLKeyboardEventSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA321A20F3B800A65D14 /* MLKeyboardEventSender.m */; };
+		367DEA4A1A20F3B800A65D14 /* MLAutoReplace.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA341A20F3B800A65D14 /* MLAutoReplace.m */; };
+		367DEA4B1A20F3B800A65D14 /* SettingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA371A20F3B800A65D14 /* SettingWindowController.m */; };
+		367DEA4C1A20F3B800A65D14 /* SettingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA381A20F3B800A65D14 /* SettingWindowController.xib */; };
+		367DEA4D1A20F3B800A65D14 /* ClassProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3B1A20F3B800A65D14 /* ClassProperties.m */; };
+		367DEA4E1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3D1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m */; };
+		367DEA4F1A20F3B800A65D14 /* MolonUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */; };
+		367DEA501A20F3B800A65D14 /* ObjcRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA421A20F3B800A65D14 /* ObjcRuntime.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		367DEA101A20F39C00A65D14 /* MLAutoReplace.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MLAutoReplace.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		367DEA131A20F39C00A65D14 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		367DEA151A20F39C00A65D14 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		367DEA191A20F39C00A65D14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		367DEA1A1A20F39C00A65D14 /* MLAutoReplace.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = MLAutoReplace.xcscheme; path = MLAutoReplace.xcodeproj/xcshareddata/xcschemes/MLAutoReplace.xcscheme; sourceTree = SOURCE_ROOT; };
+		367DEA251A20F3B800A65D14 /* NSString+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Addition.h"; sourceTree = "<group>"; };
+		367DEA261A20F3B800A65D14 /* NSString+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Addition.m"; sourceTree = "<group>"; };
+		367DEA271A20F3B800A65D14 /* NSString+PDRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PDRegex.h"; sourceTree = "<group>"; };
+		367DEA281A20F3B800A65D14 /* NSString+PDRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PDRegex.m"; sourceTree = "<group>"; };
+		367DEA291A20F3B800A65D14 /* NSTextView+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+Addition.h"; sourceTree = "<group>"; };
+		367DEA2A1A20F3B800A65D14 /* NSTextView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+Addition.m"; sourceTree = "<group>"; };
+		367DEA2D1A20F3B800A65D14 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
+		367DEA2E1A20F3B800A65D14 /* DefaultReplaceGetter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceGetter.plist; sourceTree = "<group>"; };
+		367DEA2F1A20F3B800A65D14 /* DefaultReplaceOther.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceOther.plist; sourceTree = "<group>"; };
+		367DEA311A20F3B800A65D14 /* MLKeyboardEventSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKeyboardEventSender.h; sourceTree = "<group>"; };
+		367DEA321A20F3B800A65D14 /* MLKeyboardEventSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKeyboardEventSender.m; sourceTree = "<group>"; };
+		367DEA331A20F3B800A65D14 /* MLAutoReplace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAutoReplace.h; sourceTree = "<group>"; };
+		367DEA341A20F3B800A65D14 /* MLAutoReplace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAutoReplace.m; sourceTree = "<group>"; };
+		367DEA361A20F3B800A65D14 /* SettingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindowController.h; sourceTree = "<group>"; };
+		367DEA371A20F3B800A65D14 /* SettingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingWindowController.m; sourceTree = "<group>"; };
+		367DEA381A20F3B800A65D14 /* SettingWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingWindowController.xib; sourceTree = "<group>"; };
+		367DEA3A1A20F3B800A65D14 /* ClassProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassProperties.h; sourceTree = "<group>"; };
+		367DEA3B1A20F3B800A65D14 /* ClassProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassProperties.m; sourceTree = "<group>"; };
+		367DEA3C1A20F3B800A65D14 /* MLAutoReplaceUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAutoReplaceUserDefault.h; sourceTree = "<group>"; };
+		367DEA3D1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAutoReplaceUserDefault.m; sourceTree = "<group>"; };
+		367DEA3E1A20F3B800A65D14 /* MolonUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MolonUserDefault.h; sourceTree = "<group>"; };
+		367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MolonUserDefault.m; sourceTree = "<group>"; };
+		367DEA411A20F3B800A65D14 /* ObjcRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcRuntime.h; sourceTree = "<group>"; };
+		367DEA421A20F3B800A65D14 /* ObjcRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcRuntime.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		367DEA0E1A20F39C00A65D14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				367DEA141A20F39C00A65D14 /* AppKit.framework in Frameworks */,
+				367DEA161A20F39C00A65D14 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		367DEA071A20F39C00A65D14 = {
+			isa = PBXGroup;
+			children = (
+				367DEA171A20F39C00A65D14 /* MLAutoReplace */,
+				367DEA121A20F39C00A65D14 /* Frameworks */,
+				367DEA111A20F39C00A65D14 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		367DEA111A20F39C00A65D14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA101A20F39C00A65D14 /* MLAutoReplace.xcplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		367DEA121A20F39C00A65D14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA131A20F39C00A65D14 /* AppKit.framework */,
+				367DEA151A20F39C00A65D14 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		367DEA171A20F39C00A65D14 /* MLAutoReplace */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA241A20F3B800A65D14 /* Category */,
+				367DEA351A20F3B800A65D14 /* SettingWindowController */,
+				367DEA391A20F3B800A65D14 /* UserDefault */,
+				367DEA301A20F3B800A65D14 /* KeyboardHelper */,
+				367DEA2D1A20F3B800A65D14 /* Debug.h */,
+				367DEA2E1A20F3B800A65D14 /* DefaultReplaceGetter.plist */,
+				367DEA2F1A20F3B800A65D14 /* DefaultReplaceOther.plist */,
+				367DEA331A20F3B800A65D14 /* MLAutoReplace.h */,
+				367DEA341A20F3B800A65D14 /* MLAutoReplace.m */,
+				367DEA181A20F39C00A65D14 /* Supporting Files */,
+			);
+			path = MLAutoReplace;
+			sourceTree = "<group>";
+		};
+		367DEA181A20F39C00A65D14 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA191A20F39C00A65D14 /* Info.plist */,
+				367DEA1A1A20F39C00A65D14 /* MLAutoReplace.xcscheme */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		367DEA241A20F3B800A65D14 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA251A20F3B800A65D14 /* NSString+Addition.h */,
+				367DEA261A20F3B800A65D14 /* NSString+Addition.m */,
+				367DEA271A20F3B800A65D14 /* NSString+PDRegex.h */,
+				367DEA281A20F3B800A65D14 /* NSString+PDRegex.m */,
+				367DEA291A20F3B800A65D14 /* NSTextView+Addition.h */,
+				367DEA2A1A20F3B800A65D14 /* NSTextView+Addition.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		367DEA301A20F3B800A65D14 /* KeyboardHelper */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA311A20F3B800A65D14 /* MLKeyboardEventSender.h */,
+				367DEA321A20F3B800A65D14 /* MLKeyboardEventSender.m */,
+			);
+			path = KeyboardHelper;
+			sourceTree = "<group>";
+		};
+		367DEA351A20F3B800A65D14 /* SettingWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA361A20F3B800A65D14 /* SettingWindowController.h */,
+				367DEA371A20F3B800A65D14 /* SettingWindowController.m */,
+				367DEA381A20F3B800A65D14 /* SettingWindowController.xib */,
+			);
+			path = SettingWindowController;
+			sourceTree = "<group>";
+		};
+		367DEA391A20F3B800A65D14 /* UserDefault */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA3A1A20F3B800A65D14 /* ClassProperties.h */,
+				367DEA3B1A20F3B800A65D14 /* ClassProperties.m */,
+				367DEA3C1A20F3B800A65D14 /* MLAutoReplaceUserDefault.h */,
+				367DEA3D1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m */,
+				367DEA3E1A20F3B800A65D14 /* MolonUserDefault.h */,
+				367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */,
+				367DEA401A20F3B800A65D14 /* ObjcRuntime */,
+			);
+			path = UserDefault;
+			sourceTree = "<group>";
+		};
+		367DEA401A20F3B800A65D14 /* ObjcRuntime */ = {
+			isa = PBXGroup;
+			children = (
+				367DEA411A20F3B800A65D14 /* ObjcRuntime.h */,
+				367DEA421A20F3B800A65D14 /* ObjcRuntime.m */,
+			);
+			path = ObjcRuntime;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		367DEA0F1A20F39C00A65D14 /* MLAutoReplace */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 367DEA211A20F39C00A65D14 /* Build configuration list for PBXNativeTarget "MLAutoReplace" */;
+			buildPhases = (
+				367DEA0C1A20F39C00A65D14 /* Sources */,
+				367DEA0D1A20F39C00A65D14 /* Resources */,
+				367DEA0E1A20F39C00A65D14 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MLAutoReplace;
+			productName = MLAutoReplace;
+			productReference = 367DEA101A20F39C00A65D14 /* MLAutoReplace.xcplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		367DEA081A20F39C00A65D14 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = molon;
+				TargetAttributes = {
+					367DEA0F1A20F39C00A65D14 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = 367DEA0B1A20F39C00A65D14 /* Build configuration list for PBXProject "MLAutoReplace" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 367DEA071A20F39C00A65D14;
+			productRefGroup = 367DEA111A20F39C00A65D14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				367DEA0F1A20F39C00A65D14 /* MLAutoReplace */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		367DEA0D1A20F39C00A65D14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				367DEA471A20F3B800A65D14 /* DefaultReplaceGetter.plist in Resources */,
+				367DEA481A20F3B800A65D14 /* DefaultReplaceOther.plist in Resources */,
+				367DEA4C1A20F3B800A65D14 /* SettingWindowController.xib in Resources */,
+				367DEA1B1A20F39C00A65D14 /* MLAutoReplace.xcscheme in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		367DEA0C1A20F39C00A65D14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				367DEA501A20F3B800A65D14 /* ObjcRuntime.m in Sources */,
+				367DEA4A1A20F3B800A65D14 /* MLAutoReplace.m in Sources */,
+				367DEA431A20F3B800A65D14 /* NSString+Addition.m in Sources */,
+				367DEA4B1A20F3B800A65D14 /* SettingWindowController.m in Sources */,
+				367DEA451A20F3B800A65D14 /* NSTextView+Addition.m in Sources */,
+				367DEA4F1A20F3B800A65D14 /* MolonUserDefault.m in Sources */,
+				367DEA441A20F3B800A65D14 /* NSString+PDRegex.m in Sources */,
+				367DEA491A20F3B800A65D14 /* MLKeyboardEventSender.m in Sources */,
+				367DEA4D1A20F3B800A65D14 /* ClassProperties.m in Sources */,
+				367DEA4E1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		367DEA1F1A20F39C00A65D14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		367DEA201A20F39C00A65D14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		367DEA221A20F39C00A65D14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
+				INFOPLIST_FILE = MLAutoReplace/Info.plist;
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xcplugin;
+			};
+			name = Debug;
+		};
+		367DEA231A20F39C00A65D14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
+				INFOPLIST_FILE = MLAutoReplace/Info.plist;
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xcplugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		367DEA0B1A20F39C00A65D14 /* Build configuration list for PBXProject "MLAutoReplace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367DEA1F1A20F39C00A65D14 /* Debug */,
+				367DEA201A20F39C00A65D14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		367DEA211A20F39C00A65D14 /* Build configuration list for PBXNativeTarget "MLAutoReplace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				367DEA221A20F39C00A65D14 /* Debug */,
+				367DEA231A20F39C00A65D14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 367DEA081A20F39C00A65D14 /* Project object */;
+}
