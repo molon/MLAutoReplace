@@ -30,7 +30,7 @@ static MLAutoReplace *sharedPlugin;
 
 @property (nonatomic, strong) SettingWindowController *settingWC;
 
-//@property (nonatomic, strong) dispatch_queue_t textCheckQueue;
+// @property (nonatomic, strong) dispatch_queue_t textCheckQueue;
 
 @end
 
