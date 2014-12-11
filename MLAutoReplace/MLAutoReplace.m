@@ -30,7 +30,7 @@ static MLAutoReplace *sharedPlugin;
 
 @property (nonatomic, strong) SettingWindowController *settingWC;
 
-// @property (nonatomic, strong) dispatch_queue_t textCheckQueue;
+@property (nonatomic, assign) BOOL checkSwitch;
 
 @end
 
@@ -56,8 +56,6 @@ static MLAutoReplace *sharedPlugin;
     if (self = [super init]) {
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
-        
-        //        self.textCheckQueue = dispatch_queue_create("com.molon.textCheckQueue", NULL);
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidFinishLaunching:)
@@ -133,6 +131,7 @@ static MLAutoReplace *sharedPlugin;
         return incomingEvent;
     }];
     
+    self.checkSwitch = YES;
     //监控文本改变
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textStorageDidChange:)
@@ -250,15 +249,22 @@ static MLAutoReplace *sharedPlugin;
     return YES;
 }
 
+
 #pragma mark - text change monitor
 - (void)textStorageDidChange:(NSNotification *)noti {
+    if (!self.checkSwitch) {
+        return;
+    }
+    
     if (![[noti object] isKindOfClass:kSourceTextViewClass]) {
         return;
     }
     
     //在后台线程里做。
-    //    dispatch_async(self.textCheckQueue, ^{
     NSTextView *textView = (NSTextView *)[noti object];
+    if (![textView.window.firstResponder isEqual:textView]) {
+        return;
+    }
     
     NSString *currentLine = [textView textOfCurrentLine];
     //empty should be ignored
@@ -272,7 +278,6 @@ static MLAutoReplace *sharedPlugin;
     }
     //other replace
     [self checkAndReplaceOtherWithCurrentLine:currentLine ofTextView:textView];
-    //    });
 }
 
 #pragma mark - check and replace
@@ -403,6 +408,7 @@ static MLAutoReplace *sharedPlugin;
     
 }
 
+
 #pragma mark - auto input content and remove orig conten of current line
 - (void)removeCurrentLineContentAndInputContent:(NSString*)replaceContent ofTextView:(NSTextView*)textView
 {
@@ -428,17 +434,22 @@ static MLAutoReplace *sharedPlugin;
         }
     }
     
+    DLOG(@"开始替换");
+    
     //保存以前剪切板内容
     NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
     if (!pasteBoard) {
         return;
     }
     NSString *originPBString = [pasteBoard stringForType:NSPasteboardTypeString];
+    DLOG(@"原剪切板内容:%@",originPBString);
     
     //复制要添加内容到剪切板
     [pasteBoard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
     [pasteBoard setString:replaceContent forType:NSStringPboardType];
+    DLOG(@"设置新剪切板内容:%@",replaceContent);
     
+    self.checkSwitch = NO;
     dispatch_block_t block = ^{
         MLKeyboardEventSender *kes = [[MLKeyboardEventSender alloc] init];
         BOOL useDvorakLayout = [MLKeyboardEventSender useDvorakLayout];
@@ -449,13 +460,17 @@ static MLAutoReplace *sharedPlugin;
         [textView setSelectedRange:NSMakeRange([textView endLocationOfCurrentLine]+1, 0)];
         //删掉当前这一行光标位置前面的内容 Command+Delete
         [kes sendKeyCode:kVK_Delete withModifierCommand:YES alt:NO shift:NO control:NO];
+        DLOG(@"删除此行");
         
         //粘贴剪切板内容
         NSInteger kKeyVCode = useDvorakLayout?kVK_ANSI_Period : kVK_ANSI_V;
         [kes sendKeyCode:kKeyVCode withModifierCommand:YES alt:NO shift:NO control:NO];
+        DLOG(@"粘贴新内容:%@",replaceContent);
         
         //这个按键用来模拟下上个命令执行完毕了，然后需要还原剪切板 ,按键是同步进行的,所以接到F20的时候应该之前的都执行完毕了
         [kes sendKeyCode:kVK_F20];
+        
+        [kes endKeyBoradEvents];
         
         static id eventMonitor = nil;
         eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask handler:^NSEvent *(NSEvent *incomingEvent) {
@@ -465,15 +480,21 @@ static MLAutoReplace *sharedPlugin;
                 
                 //还原剪切板
                 [pasteBoard setString:originPBString forType:NSStringPboardType];
+                DLOG(@"还原剪切板内容:%@",originPBString);
                 
                 if (isNeedAutoTab) {
+                    [kes beginKeyBoradEvents];
+                    
                     //光标移到tab开始的位置
                     [textView setSelectedRange:NSMakeRange(tabBeginLocation, 0)];
                     //Send a 'tab' after insert the doc. For our lazy programmers. :)
                     [kes sendKeyCode:kVK_Tab];
+                    DLOG(@"去tab位置");
+                    
+                    [kes endKeyBoradEvents];
                 }
                 
-                [kes endKeyBoradEvents];
+                self.checkSwitch = YES;
                 
                 //让默认行为无效
                 return nil;
