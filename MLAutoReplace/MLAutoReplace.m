@@ -13,6 +13,7 @@
 #import "NSTextView+Addition.h"
 #import "NSString+Addition.h"
 #import "NSString+PDRegex.h"
+#import "NSDate+Addition.h"
 
 #import "Debug.h"
 
@@ -345,6 +346,11 @@ static MLAutoReplace *sharedPlugin;
         return NO;
     }
     
+    //时间标签会替换成当前时间
+    if ([replaceContent rangeOfString:@"<datetime>"].location!=NSNotFound) {
+        replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<datetime>" withString:[NSDate nowString]];
+    }
+    
     //按键以完成替换
     [self removeCurrentLineContentAndInputContent:replaceContent ofTextView:textView];
     
@@ -398,6 +404,12 @@ static MLAutoReplace *sharedPlugin;
         if(![currentLine vv_matchesPatternRegexPattern:regex]){
             continue;
         }
+        
+        //时间标签会替换成当前时间
+        if ([replaceContent rangeOfString:@"<datetime>"].location!=NSNotFound) {
+            replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<datetime>" withString:[NSDate nowString]];
+        }
+        
         //按键以完成替换
         [self removeCurrentLineContentAndInputContent:replaceContent ofTextView:textView];
         return YES;
@@ -407,7 +419,6 @@ static MLAutoReplace *sharedPlugin;
     return NO;
     
 }
-
 
 #pragma mark - auto input content and remove orig conten of current line
 - (void)removeCurrentLineContentAndInputContent:(NSString*)replaceContent ofTextView:(NSTextView*)textView

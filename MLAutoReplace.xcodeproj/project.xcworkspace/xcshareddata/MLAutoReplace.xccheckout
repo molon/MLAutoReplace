@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>48F7138B22D07E2F0C6AB92CA43BD0C571F0E398</key>
-		<string>https://github.com/molon/MLAutoReplace.git</string>
+		<string>github.com:molon/MLAutoReplace.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>MLAutoReplace.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/molon/MLAutoReplace.git</string>
+	<string>github.com:molon/MLAutoReplace.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

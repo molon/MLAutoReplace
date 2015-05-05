@@ -23,6 +23,7 @@
 		367DEA4E1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3D1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m */; };
 		367DEA4F1A20F3B800A65D14 /* MolonUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */; };
 		367DEA501A20F3B800A65D14 /* ObjcRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA421A20F3B800A65D14 /* ObjcRuntime.m */; };
+		36C56E241AF8601B003498D4 /* NSDate+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C56E231AF8601B003498D4 /* NSDate+Addition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,8 @@
 		367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MolonUserDefault.m; sourceTree = "<group>"; };
 		367DEA411A20F3B800A65D14 /* ObjcRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcRuntime.h; sourceTree = "<group>"; };
 		367DEA421A20F3B800A65D14 /* ObjcRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcRuntime.m; sourceTree = "<group>"; };
+		36C56E221AF8601B003498D4 /* NSDate+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Addition.h"; sourceTree = "<group>"; };
+		36C56E231AF8601B003498D4 /* NSDate+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Addition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				367DEA281A20F3B800A65D14 /* NSString+PDRegex.m */,
 				367DEA291A20F3B800A65D14 /* NSTextView+Addition.h */,
 				367DEA2A1A20F3B800A65D14 /* NSTextView+Addition.m */,
+				36C56E221AF8601B003498D4 /* NSDate+Addition.h */,
+				36C56E231AF8601B003498D4 /* NSDate+Addition.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				367DEA431A20F3B800A65D14 /* NSString+Addition.m in Sources */,
 				367DEA4B1A20F3B800A65D14 /* SettingWindowController.m in Sources */,
 				367DEA451A20F3B800A65D14 /* NSTextView+Addition.m in Sources */,
+				36C56E241AF8601B003498D4 /* NSDate+Addition.m in Sources */,
 				367DEA4F1A20F3B800A65D14 /* MolonUserDefault.m in Sources */,
 				367DEA441A20F3B800A65D14 /* NSString+PDRegex.m in Sources */,
 				367DEA491A20F3B800A65D14 /* MLKeyboardEventSender.m in Sources */,
