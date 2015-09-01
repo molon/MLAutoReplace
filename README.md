@@ -51,6 +51,12 @@ Exmple:
 You must reload .plist file with shortcut `control+option+command+\` after editing and saving it.   
 You can also reload it with the `Reload .plist Data` button in MLAutoReplace window.   
 
+How to use:   
+```
+- (UIImageView *)xxx///
+```   
+Dont forget `///` please. :)
+
 ##Regex replacer
 
 Exmple:  
