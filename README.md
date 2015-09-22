@@ -3,6 +3,12 @@ MLAutoReplace
 
 XCode plugin , Thanks for [VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode).  
 
+##How to support newest version Xcode?
+
+```
+find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/MLAutoReplace.xcplugin -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID`
+```
+
 ##Overview
 You can use shortcut key `Shift+Command+\` to auto re-indent all source of the current edit file.  
 
