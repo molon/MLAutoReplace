@@ -192,6 +192,7 @@
 				367DEA0C1A20F39C00A65D14 /* Sources */,
 				367DEA0D1A20F39C00A65D14 /* Resources */,
 				367DEA0E1A20F39C00A65D14 /* Frameworks */,
+				36480E341BB3AA2900143F13 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -246,6 +247,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		36480E341BB3AA2900143F13 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find ~/Library/Application\\ Support/Developer/Shared/Xcode/Plug-ins/MLAutoReplace.xcplugin -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID`";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		367DEA0C1A20F39C00A65D14 /* Sources */ = {

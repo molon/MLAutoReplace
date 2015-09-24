@@ -3,15 +3,8 @@ MLAutoReplace
 
 XCode plugin , Thanks for [VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode).  
 
-##How to support newest version Xcode?
-
-```
-find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/MLAutoReplace.xcplugin -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID`
-```
-
 ##Overview
 You can use shortcut key `Shift+Command+\` to auto re-indent all source of the current edit file.  
-
 
 You can custom other replacer with regex.  
 ![regex replace](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceOther.gif)  
@@ -19,6 +12,9 @@ You can custom other replacer with regex.
 
 You can input common getter quickly.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceGetter.gif)  
+
+##How to install?
+Download this project and run.  
 
 ##Re-Indent
 
