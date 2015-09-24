@@ -14,8 +14,8 @@ You can use shortcut key `Shift+Command+\` to auto re-indent all source of the c
 
 
 You can custom other replacer with regex.  
-![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceOther.gif)  
-
+![regex replace](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceOther.gif)  
+![regex replace](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceTS.gif)  
 
 You can input common getter quickly.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceGetter.gif)  
