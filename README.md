@@ -1,7 +1,7 @@
 MLAutoReplace
 =============
 
-XCode plugin , Thanks for [VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode).  
+XCode plugin, Re-Intent, make you write code more quickly.
 
 ##Overview
 You can use shortcut key `Shift+Command+\` to auto re-indent all source of the current edit file.  
