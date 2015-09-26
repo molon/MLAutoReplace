@@ -261,7 +261,7 @@ static MLAutoReplace *sharedPlugin;
         return;
     }
     
-    //在后台线程里做。
+    //本来以下是在后台线程里做的，现在去掉了，实则不必要，也免得发生可能的不稳定。懒得深入研究。
     NSTextView *textView = (NSTextView *)[noti object];
     if (![textView.window.firstResponder isEqual:textView]) {
         return;
