@@ -114,6 +114,11 @@ static MLAutoReplace *sharedPlugin;
             
             [kes endKeyBoradEvents];
             
+            //防止越界
+            if (textView.textStorage.length<=locationOfCurrentLine) {
+                return nil;
+            }
+            
             //光标移到原本所在行的头部位置，隔个0.1秒再触发,其实最终有可能不是目标位置，因为re-indent之后文本会被调整
             //差不多就成了
             double delayInSeconds = 0.1f;
