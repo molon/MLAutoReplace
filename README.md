@@ -25,6 +25,25 @@ If you find that press `Shift+Command+\` does nothing.
 Please ensure that the shortcut key setting of Re-Intent is default.
 ![re-intent shortcut key setting](https://raw.githubusercontent.com/molon/MLAutoReplace/master/re-intent-setting.png) 
 
+##Regex replacer
+
+Exmple:  
+![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/regex.png)  
+This item means that plugin will replace `@s/` to `@property (nonatomic, strong) <#custom#>`.  
+
+
+The plugin will detect the content of current input line.  
+
+Some placeholder can be replace with context.
+
+- `<datetime>`: current datetime, you can use it to mark your edit time.
+- `<declare_class_below>`: the class name of the first `@interface XXX :` below.
+- `<current_protocol>`: the protocol name in current line.
+
+A demo for pseudo-generic:
+
+![pseudo-generic](https://raw.githubusercontent.com/molon/MLAutoReplace/master/pseudo-generic.gif)
+
 
 ##Getter replacer
 
@@ -59,22 +78,3 @@ How to use:
 - (UIImageView *)xxx///
 ```   
 Dont forget `///` please. :)
-
-##Regex replacer
-
-Exmple:  
-![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/regex.png)  
-This item means that plugin will replace `@s/` to `@property (nonatomic, strong) <#custom#>`.  
-
-
-The plugin will detect the content of current input line.  
-
-Some placeholder can be replace with context.
-
-- `<datetime>`: current datetime, you can use it to mark your edit time.
-- `<declare_class_below>`: the class name of the first `@interface XXX :` below.
-- `<current_protocol>`: the protocol name in current line.
-
-A demo for pseudo-generic:
-
-![pseudo-generic](https://raw.githubusercontent.com/molon/MLAutoReplace/master/pseudo-generic.gif)
