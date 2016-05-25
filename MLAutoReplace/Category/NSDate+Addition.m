@@ -10,7 +10,7 @@
 
 @implementation NSDate (Addition)
 
-+ (NSString*)nowString
++ (NSString*)ml_nowString
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];

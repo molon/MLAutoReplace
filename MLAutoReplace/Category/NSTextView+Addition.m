@@ -8,22 +8,23 @@
 
 #import "NSTextView+Addition.h"
 #import "NSString+Addition.h"
+#import "NSString+PDRegex.h"
 
 @implementation NSTextView (Addition)
 
-- (NSInteger)currentCurseLocation
+- (NSInteger)ml_currentCurseLocation
 {
     return [[[self selectedRanges] objectAtIndex:0] rangeValue].location;
 }
 
-- (NSString *)textOfCurrentLine
+- (NSString *)ml_textOfCurrentLine
 {
     NSString *string = self.textStorage.string;
     if ([NSString IsNilOrEmpty:string]) {
         return nil;
     }
     
-    NSInteger curseLocation = [self currentCurseLocation];
+    NSInteger curseLocation = [self ml_currentCurseLocation];
     NSRange range = NSMakeRange(0, curseLocation);
     
     NSUInteger thisLineBeginLocation = [string rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch range:range].location;
@@ -41,14 +42,14 @@
     return nil;
 }
 
-- (NSUInteger)locationOfCurrentLine
+- (NSUInteger)ml_beginLocationOfCurrentLine
 {
     NSString *string = self.textStorage.string;
     if ([NSString IsNilOrEmpty:string]) {
         return 0;
     }
     
-    NSInteger curseLocation = [self currentCurseLocation];
+    NSInteger curseLocation = [self ml_currentCurseLocation];
     NSRange range = NSMakeRange(0, curseLocation);
     
     NSUInteger thisLineBeginLocation = [string rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch range:range].location;
@@ -61,14 +62,14 @@
     return 0;
 }
 
-- (NSUInteger)endLocationOfCurrentLine
+- (NSUInteger)ml_endLocationOfCurrentLine
 {
     NSString *string = self.textStorage.string;
     if ([NSString IsNilOrEmpty:string]) {
         return 0;
     }
     
-    NSInteger curseLocation = [self currentCurseLocation];
+    NSInteger curseLocation = [self ml_currentCurseLocation];
     NSRange range = NSMakeRange(0, curseLocation);
     
     NSUInteger thisLineBeginLocation = [string rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet] options:NSBackwardsSearch range:range].location;
@@ -84,6 +85,11 @@
     
     return 0;
     
+}
+
+-(NSString *)ml_textUntilNextString:(NSString *)findString
+{
+    return [self.textStorage.string vvv_textUntilNextString:findString currentLocation:[self ml_currentCurseLocation]];
 }
 
 @end

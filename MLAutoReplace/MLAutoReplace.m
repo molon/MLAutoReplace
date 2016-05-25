@@ -89,7 +89,7 @@ static MLAutoReplace *sharedPlugin;
         __strong __typeof(weakSelf)sSelf = weakSelf;
         if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_ANSI_Backslash
             && (incomingEvent.modifierFlags&kCGEventFlagMaskShift)&&(incomingEvent.modifierFlags&kCGEventFlagMaskCommand)) {
-        
+            
             //如果设置里不需要此功能则返回
             if (![sSelf.settingWC isUseAutoReIntent]) {
                 return incomingEvent;
@@ -103,7 +103,7 @@ static MLAutoReplace *sharedPlugin;
             
             DLOG(@"按了shift+command+|,window:%@，windowNumber:%ld，并且执行自动re-indent",incomingEvent.window,incomingEvent.windowNumber);
             
-            NSUInteger locationOfCurrentLine = [textView locationOfCurrentLine];
+            NSUInteger locationOfCurrentLine = [textView ml_beginLocationOfCurrentLine];
             
             MLKeyboardEventSender *kes = [[MLKeyboardEventSender alloc] init];
             [kes beginKeyBoradEvents];
@@ -273,7 +273,7 @@ static MLAutoReplace *sharedPlugin;
         return;
     }
     
-    NSString *currentLine = [textView textOfCurrentLine];
+    NSString *currentLine = [textView ml_textOfCurrentLine];
     //empty should be ignored
     if ([NSString IsNilOrEmpty:currentLine]) {
         return;
@@ -292,13 +292,13 @@ static MLAutoReplace *sharedPlugin;
 {
     //eg:- (UIView *)view///
     static NSString *lastCurrentLine = nil;
-    if(![currentLine vv_matchesPatternRegexPattern:@"^\\s*-\\s*\\(\\s*\\w+\\s*\\*?\\s*\\)\\s*\\w+\\s*/{3}$"]){
+    if(![currentLine vvv_matchesPatternRegexPattern:@"^\\s*-\\s*\\(\\s*\\w+\\s*\\*?\\s*\\)\\s*\\w+\\s*/{3}$"]){
         lastCurrentLine = currentLine;
         return NO;
     }
     
     //这里用来保证是一个字一个字把最后三个/敲出来的，而不是复制啊，或者从中间敲的
-    if(![[lastCurrentLine stringByAppendingString:@"/"]isEqualToString:currentLine]||[textView endLocationOfCurrentLine]+1!=[textView currentCurseLocation]){
+    if(![[lastCurrentLine stringByAppendingString:@"/"]isEqualToString:currentLine]||[textView ml_endLocationOfCurrentLine]+1!=[textView ml_currentCurseLocation]){
         lastCurrentLine = currentLine;
         return NO;
     }
@@ -306,14 +306,14 @@ static MLAutoReplace *sharedPlugin;
     
     
     //get the return type of getter
-    NSArray *array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\(\\s*(\\w+\\s*\\*?)\\s*\\)"];
+    NSArray *array = [currentLine vvv_stringsByExtractingGroupsUsingRegexPattern:@"\\(\\s*(\\w+\\s*\\*?)\\s*\\)"];
     if (array.count<=0) {
         return NO;
     }
     NSString *type = [array[0] stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     //get the name of getter
-    array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\)\\s*(\\w+)\\s*/{3}$"];
+    array = [currentLine vvv_stringsByExtractingGroupsUsingRegexPattern:@"\\)\\s*(\\w+)\\s*/{3}$"];
     if (array.count<=0) {
         return NO;
     }
@@ -354,7 +354,7 @@ static MLAutoReplace *sharedPlugin;
     
     //时间标签会替换成当前时间
     if ([replaceContent rangeOfString:@"<datetime>"].location!=NSNotFound) {
-        replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<datetime>" withString:[NSDate nowString]];
+        replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<datetime>" withString:[NSDate ml_nowString]];
     }
     
     //按键以完成替换
@@ -407,13 +407,37 @@ static MLAutoReplace *sharedPlugin;
         }
         
         //检测是否匹配
-        if(![currentLine vv_matchesPatternRegexPattern:regex]){
+        if(![currentLine vvv_matchesPatternRegexPattern:regex]){
             continue;
         }
         
         //时间标签会替换成当前时间
         if ([replaceContent rangeOfString:@"<datetime>"].location!=NSNotFound) {
-            replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<datetime>" withString:[NSDate nowString]];
+            replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<datetime>" withString:[NSDate ml_nowString]];
+        }
+        
+        //如果有获取下面的类名的标签，必须继承自某父类才可以
+        if ([replaceContent rangeOfString:@"<declare_class_below>"].location!=NSNotFound) {
+            //找到下面的最近的直到最近的一些特殊标记
+            NSString *textUntilColon = [textView ml_textUntilNextString:@":"];
+            if (textUntilColon.length<=0) {
+                continue;
+            }
+            //探测其是否满足 @interface XXX: 这样的格式，满足的话就拎出来XXX
+            NSArray *array = [textUntilColon vvv_stringsByExtractingGroupsUsingRegexPattern:@"@interface\\s+(\\w+)\\s*:"];
+            if (array.count<=0) {
+                continue;
+            }
+            replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<declare_class_below>" withString:array[0]];
+        }
+        
+        if ([replaceContent rangeOfString:@"<current_protocol>"].location!=NSNotFound) {
+            //探测其是否满足CLS<XXX>这样的格式，满足的话就拎出来XXX,XXX呢又不能带*
+            NSArray *array = [currentLine vvv_stringsByExtractingGroupsUsingRegexPattern:@"\\w+\\s*<\\s*(\\w+)\\s*>"];
+            if (array.count<=0) {
+                continue;
+            }
+            replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<current_protocol>" withString:array[0]];
         }
         
         //按键以完成替换
@@ -430,16 +454,16 @@ static MLAutoReplace *sharedPlugin;
 - (void)removeCurrentLineContentAndInputContent:(NSString*)replaceContent ofTextView:(NSTextView*)textView
 {
     //记录下光标位置，找到此行开头的位置
-    NSUInteger currentLocation = [textView locationOfCurrentLine];
+    NSUInteger currentLocation = [textView ml_beginLocationOfCurrentLine];
     NSUInteger tabBeginLocation = currentLocation;
     
     //根据replaceContent里的内容检查是否需要自动Tab
     BOOL isNeedAutoTab = NO;
-    if([replaceContent vv_matchesPatternRegexPattern:@"<#\\w+#>"]){
+    if([replaceContent vvv_matchesPatternRegexPattern:@"<#\\w+#>"]){
         isNeedAutoTab = YES;
         
         //找到第一个可tab的所在位置
-        NSArray *array = [replaceContent vv_stringsByExtractingGroupsUsingRegexPattern:@"(<#\\w+#>)"];
+        NSArray *array = [replaceContent vvv_stringsByExtractingGroupsUsingRegexPattern:@"(<#\\w+#>)"];
         if (array.count<=0) {
             return;
         }
@@ -474,7 +498,7 @@ static MLAutoReplace *sharedPlugin;
         [kes beginKeyBoradEvents];
         
         //光标移到此行结束的位置,这样才能一次把一行都删去
-        [textView setSelectedRange:NSMakeRange([textView endLocationOfCurrentLine]+1, 0)];
+        [textView setSelectedRange:NSMakeRange([textView ml_endLocationOfCurrentLine]+1, 0)];
         //删掉当前这一行光标位置前面的内容 Command+Delete
         [kes sendKeyCode:kVK_Delete withModifierCommand:YES alt:NO shift:NO control:NO];
         DLOG(@"删除此行");

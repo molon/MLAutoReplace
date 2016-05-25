@@ -14,11 +14,11 @@
 		367DEA441A20F3B800A65D14 /* NSString+PDRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA281A20F3B800A65D14 /* NSString+PDRegex.m */; };
 		367DEA451A20F3B800A65D14 /* NSTextView+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA2A1A20F3B800A65D14 /* NSTextView+Addition.m */; };
 		367DEA471A20F3B800A65D14 /* DefaultReplaceGetter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA2E1A20F3B800A65D14 /* DefaultReplaceGetter.plist */; };
-		367DEA481A20F3B800A65D14 /* DefaultReplaceOther.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA2F1A20F3B800A65D14 /* DefaultReplaceOther.plist */; };
 		367DEA491A20F3B800A65D14 /* MLKeyboardEventSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA321A20F3B800A65D14 /* MLKeyboardEventSender.m */; };
 		367DEA4A1A20F3B800A65D14 /* MLAutoReplace.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA341A20F3B800A65D14 /* MLAutoReplace.m */; };
 		367DEA4B1A20F3B800A65D14 /* SettingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA371A20F3B800A65D14 /* SettingWindowController.m */; };
 		367DEA4C1A20F3B800A65D14 /* SettingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA381A20F3B800A65D14 /* SettingWindowController.xib */; };
+		36BE7DAC1CF621EE00DBDF57 /* DefaultReplaceOther.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36BE7DAB1CF621EE00DBDF57 /* DefaultReplaceOther.plist */; };
 		36C56E241AF8601B003498D4 /* NSDate+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C56E231AF8601B003498D4 /* NSDate+Addition.m */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,6 @@
 		367DEA2A1A20F3B800A65D14 /* NSTextView+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+Addition.m"; sourceTree = "<group>"; };
 		367DEA2D1A20F3B800A65D14 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		367DEA2E1A20F3B800A65D14 /* DefaultReplaceGetter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceGetter.plist; sourceTree = "<group>"; };
-		367DEA2F1A20F3B800A65D14 /* DefaultReplaceOther.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceOther.plist; sourceTree = "<group>"; };
 		367DEA311A20F3B800A65D14 /* MLKeyboardEventSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLKeyboardEventSender.h; sourceTree = "<group>"; };
 		367DEA321A20F3B800A65D14 /* MLKeyboardEventSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLKeyboardEventSender.m; sourceTree = "<group>"; };
 		367DEA331A20F3B800A65D14 /* MLAutoReplace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAutoReplace.h; sourceTree = "<group>"; };
@@ -44,6 +43,7 @@
 		367DEA361A20F3B800A65D14 /* SettingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindowController.h; sourceTree = "<group>"; };
 		367DEA371A20F3B800A65D14 /* SettingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingWindowController.m; sourceTree = "<group>"; };
 		367DEA381A20F3B800A65D14 /* SettingWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingWindowController.xib; sourceTree = "<group>"; };
+		36BE7DAB1CF621EE00DBDF57 /* DefaultReplaceOther.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultReplaceOther.plist; sourceTree = "<group>"; };
 		36C56E221AF8601B003498D4 /* NSDate+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Addition.h"; sourceTree = "<group>"; };
 		36C56E231AF8601B003498D4 /* NSDate+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Addition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +95,7 @@
 				367DEA301A20F3B800A65D14 /* KeyboardHelper */,
 				367DEA2D1A20F3B800A65D14 /* Debug.h */,
 				367DEA2E1A20F3B800A65D14 /* DefaultReplaceGetter.plist */,
-				367DEA2F1A20F3B800A65D14 /* DefaultReplaceOther.plist */,
+				36BE7DAB1CF621EE00DBDF57 /* DefaultReplaceOther.plist */,
 				367DEA331A20F3B800A65D14 /* MLAutoReplace.h */,
 				367DEA341A20F3B800A65D14 /* MLAutoReplace.m */,
 				367DEA181A20F39C00A65D14 /* Supporting Files */,
@@ -204,8 +204,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				367DEA471A20F3B800A65D14 /* DefaultReplaceGetter.plist in Resources */,
-				367DEA481A20F3B800A65D14 /* DefaultReplaceOther.plist in Resources */,
 				367DEA4C1A20F3B800A65D14 /* SettingWindowController.xib in Resources */,
+				36BE7DAC1CF621EE00DBDF57 /* DefaultReplaceOther.plist in Resources */,
 				367DEA1B1A20F39C00A65D14 /* MLAutoReplace.xcscheme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

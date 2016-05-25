@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (PDRegex)
+//就是怕和VV的类重名而两者不能共存，不知道有没影响，为了保险起见。
+@interface NSString (RENAME_PDRegex)
 
--(NSString *) vv_stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement;
--(NSString *) vv_stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL) ignoreCase;
--(NSString *) vv_stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine;
--(NSArray *) vv_stringsByExtractingGroupsUsingRegexPattern:(NSString *)regex;
--(NSArray *) vv_stringsByExtractingGroupsUsingRegexPattern:(NSString *)regex caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine;
--(BOOL) vv_matchesPatternRegexPattern:(NSString *)regex;
--(BOOL) vv_matchesPatternRegexPattern:(NSString *)regex caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine;
+-(NSString *) vvv_stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement;
+-(NSString *) vvv_stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL) ignoreCase;
+-(NSString *) vvv_stringByReplacingRegexPattern:(NSString *)regex withString:(NSString *) replacement caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine;
+-(NSArray *) vvv_stringsByExtractingGroupsUsingRegexPattern:(NSString *)regex;
+-(NSArray *) vvv_stringsByExtractingGroupsUsingRegexPattern:(NSString *)regex caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine;
+-(BOOL) vvv_matchesPatternRegexPattern:(NSString *)regex;
+-(BOOL) vvv_matchesPatternRegexPattern:(NSString *)regex caseInsensitive:(BOOL) ignoreCase treatAsOneLine:(BOOL) assumeMultiLine;
+-(NSString *) vvv_textUntilNextString:(NSString *)findString currentLocation:(NSInteger)location;
 
 @end

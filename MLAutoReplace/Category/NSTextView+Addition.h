@@ -10,13 +10,18 @@
 
 @interface NSTextView (Addition)
 
-- (NSInteger)currentCurseLocation;
+- (NSInteger)ml_currentCurseLocation;
 
 //get begin location of current curse location line
-- (NSUInteger)locationOfCurrentLine;
+- (NSUInteger)ml_beginLocationOfCurrentLine;
 
-- (NSUInteger)endLocationOfCurrentLine;
+//get end
+- (NSUInteger)ml_endLocationOfCurrentLine;
+
 //get text of current curse location line
-- (NSString *)textOfCurrentLine;
+- (NSString *)ml_textOfCurrentLine;
+
+//从当前位置往后找字符串直到找到XXX为止
+-(NSString *)ml_textUntilNextString:(NSString *)findString;
 
 @end

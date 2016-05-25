@@ -10,6 +10,6 @@
 
 @interface NSDate (Addition)
 
-+ (NSString*)nowString;
++ (NSString*)ml_nowString;
 
 @end

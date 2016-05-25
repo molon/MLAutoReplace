@@ -69,4 +69,12 @@ This item means that plugin will replace `@s/` to `@property (nonatomic, strong)
 
 The plugin will detect the content of current input line.  
 
+Some placeholder can be replace with context.
 
+- `<datetime>`: current datetime, you can use it to mark your edit time.
+- `<declare_class_below>`: the class name of the first `@interface XXX :` below.
+- `<current_protocol>`: the protocol name in current line.
+
+A demo for pseudo-generic:
+
+![pseudo-generic](https://raw.githubusercontent.com/molon/MLAutoReplace/master/pseudo-generic.gif)
