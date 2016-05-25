@@ -14,18 +14,10 @@
         return YES;
     }
     
-	if (str == nil) {
+	if (str == nil||str.length<=0) {
 		return YES;
 	}
-	
-	NSMutableString *string = [[NSMutableString alloc] init];
-	[string setString:str];
-	CFStringTrimWhitespace((__bridge CFMutableStringRef)string);
-	if([string length] == 0)
-	{
-		return YES;
-	}
-	return NO;
+    return ([str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length<=0);
 }
 
 @end

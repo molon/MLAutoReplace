@@ -19,10 +19,6 @@
 		367DEA4A1A20F3B800A65D14 /* MLAutoReplace.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA341A20F3B800A65D14 /* MLAutoReplace.m */; };
 		367DEA4B1A20F3B800A65D14 /* SettingWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA371A20F3B800A65D14 /* SettingWindowController.m */; };
 		367DEA4C1A20F3B800A65D14 /* SettingWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 367DEA381A20F3B800A65D14 /* SettingWindowController.xib */; };
-		367DEA4D1A20F3B800A65D14 /* ClassProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3B1A20F3B800A65D14 /* ClassProperties.m */; };
-		367DEA4E1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3D1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m */; };
-		367DEA4F1A20F3B800A65D14 /* MolonUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */; };
-		367DEA501A20F3B800A65D14 /* ObjcRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 367DEA421A20F3B800A65D14 /* ObjcRuntime.m */; };
 		36C56E241AF8601B003498D4 /* NSDate+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C56E231AF8601B003498D4 /* NSDate+Addition.m */; };
 /* End PBXBuildFile section */
 
@@ -48,14 +44,6 @@
 		367DEA361A20F3B800A65D14 /* SettingWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingWindowController.h; sourceTree = "<group>"; };
 		367DEA371A20F3B800A65D14 /* SettingWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingWindowController.m; sourceTree = "<group>"; };
 		367DEA381A20F3B800A65D14 /* SettingWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingWindowController.xib; sourceTree = "<group>"; };
-		367DEA3A1A20F3B800A65D14 /* ClassProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassProperties.h; sourceTree = "<group>"; };
-		367DEA3B1A20F3B800A65D14 /* ClassProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassProperties.m; sourceTree = "<group>"; };
-		367DEA3C1A20F3B800A65D14 /* MLAutoReplaceUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLAutoReplaceUserDefault.h; sourceTree = "<group>"; };
-		367DEA3D1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLAutoReplaceUserDefault.m; sourceTree = "<group>"; };
-		367DEA3E1A20F3B800A65D14 /* MolonUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MolonUserDefault.h; sourceTree = "<group>"; };
-		367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MolonUserDefault.m; sourceTree = "<group>"; };
-		367DEA411A20F3B800A65D14 /* ObjcRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcRuntime.h; sourceTree = "<group>"; };
-		367DEA421A20F3B800A65D14 /* ObjcRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcRuntime.m; sourceTree = "<group>"; };
 		36C56E221AF8601B003498D4 /* NSDate+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Addition.h"; sourceTree = "<group>"; };
 		36C56E231AF8601B003498D4 /* NSDate+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Addition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,7 +92,6 @@
 			children = (
 				367DEA241A20F3B800A65D14 /* Category */,
 				367DEA351A20F3B800A65D14 /* SettingWindowController */,
-				367DEA391A20F3B800A65D14 /* UserDefault */,
 				367DEA301A20F3B800A65D14 /* KeyboardHelper */,
 				367DEA2D1A20F3B800A65D14 /* Debug.h */,
 				367DEA2E1A20F3B800A65D14 /* DefaultReplaceGetter.plist */,
@@ -157,29 +144,6 @@
 				367DEA381A20F3B800A65D14 /* SettingWindowController.xib */,
 			);
 			path = SettingWindowController;
-			sourceTree = "<group>";
-		};
-		367DEA391A20F3B800A65D14 /* UserDefault */ = {
-			isa = PBXGroup;
-			children = (
-				367DEA3A1A20F3B800A65D14 /* ClassProperties.h */,
-				367DEA3B1A20F3B800A65D14 /* ClassProperties.m */,
-				367DEA3C1A20F3B800A65D14 /* MLAutoReplaceUserDefault.h */,
-				367DEA3D1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m */,
-				367DEA3E1A20F3B800A65D14 /* MolonUserDefault.h */,
-				367DEA3F1A20F3B800A65D14 /* MolonUserDefault.m */,
-				367DEA401A20F3B800A65D14 /* ObjcRuntime */,
-			);
-			path = UserDefault;
-			sourceTree = "<group>";
-		};
-		367DEA401A20F3B800A65D14 /* ObjcRuntime */ = {
-			isa = PBXGroup;
-			children = (
-				367DEA411A20F3B800A65D14 /* ObjcRuntime.h */,
-				367DEA421A20F3B800A65D14 /* ObjcRuntime.m */,
-			);
-			path = ObjcRuntime;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,17 +233,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				367DEA501A20F3B800A65D14 /* ObjcRuntime.m in Sources */,
 				367DEA4A1A20F3B800A65D14 /* MLAutoReplace.m in Sources */,
 				367DEA431A20F3B800A65D14 /* NSString+Addition.m in Sources */,
 				367DEA4B1A20F3B800A65D14 /* SettingWindowController.m in Sources */,
 				367DEA451A20F3B800A65D14 /* NSTextView+Addition.m in Sources */,
 				36C56E241AF8601B003498D4 /* NSDate+Addition.m in Sources */,
-				367DEA4F1A20F3B800A65D14 /* MolonUserDefault.m in Sources */,
 				367DEA441A20F3B800A65D14 /* NSString+PDRegex.m in Sources */,
 				367DEA491A20F3B800A65D14 /* MLKeyboardEventSender.m in Sources */,
-				367DEA4D1A20F3B800A65D14 /* ClassProperties.m in Sources */,
-				367DEA4E1A20F3B800A65D14 /* MLAutoReplaceUserDefault.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

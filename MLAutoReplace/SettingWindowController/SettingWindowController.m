@@ -8,14 +8,16 @@
 
 #import "SettingWindowController.h"
 #import "MLAutoReplace.h"
-#import "MLAutoReplaceUserDefault.h"
 #import "Debug.h"
 
 #define kEditPlistApplicationName @"Xcode"
 
+NSString * const kIsUseAutoReIntentUserDefaultKey = @"com.molon.kIsUseAutoReIntentUserDefaultKey";
+
 @interface SettingWindowController ()
 
 @property (weak) IBOutlet NSButton *useAutoReIndentCheckBox;
+@property (nonatomic, assign) BOOL isUseAutoReIntent;
 
 @end
 
@@ -26,7 +28,11 @@
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
-        
+        id obj = [[NSUserDefaults standardUserDefaults] objectForKey:kIsUseAutoReIntentUserDefaultKey];
+        if (!obj||[obj isKindOfClass:[NSNull class]]) {
+            obj = @(YES);
+        }
+        self.isUseAutoReIntent = [obj boolValue];
     }
     return self;
 }
@@ -36,7 +42,7 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    self.useAutoReIndentCheckBox.state = [MLAutoReplaceUserDefault shareInstance].isUseAutoReIndent;
+    self.useAutoReIndentCheckBox.state = self.isUseAutoReIntent;
 }
 
 - (void)dealloc
@@ -84,7 +90,16 @@
 
 - (IBAction)autoReIndentSwitch:(id)sender {
     NSButton *checkBox = (NSButton*)sender;
-    [MLAutoReplaceUserDefault shareInstance].isUseAutoReIndent = checkBox.state;
+    
+    self.isUseAutoReIntent = checkBox.state;
+}
+
+- (void)setIsUseAutoReIntent:(BOOL)isUseAutoReIntent
+{
+    _isUseAutoReIntent = isUseAutoReIntent;
+    
+    [[NSUserDefaults standardUserDefaults]setObject:@(isUseAutoReIntent) forKey:kIsUseAutoReIntentUserDefaultKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 @end

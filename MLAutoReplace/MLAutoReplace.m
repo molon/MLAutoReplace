@@ -9,7 +9,6 @@
 #import "MLAutoReplace.h"
 #import "MLKeyboardEventSender.h"
 #import "SettingWindowController.h"
-#import "MLAutoReplaceUserDefault.h"
 #import "NSTextView+Addition.h"
 #import "NSString+Addition.h"
 #import "NSString+PDRegex.h"
@@ -85,12 +84,14 @@ static MLAutoReplace *sharedPlugin;
     
     //添加按键检测 ,检测shift+command+|，用来自动去处理当前自动re-indent
     //当前的弊端是如果用户打开XCode之后从来木有编辑过一次程序，那就没有用
+    __weak __typeof(self)weakSelf = self;
     self.eventMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSKeyDownMask handler:^NSEvent *(NSEvent *incomingEvent) {
+        __strong __typeof(weakSelf)sSelf = weakSelf;
         if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_ANSI_Backslash
             && (incomingEvent.modifierFlags&kCGEventFlagMaskShift)&&(incomingEvent.modifierFlags&kCGEventFlagMaskCommand)) {
-            
+        
             //如果设置里不需要此功能则返回
-            if (![MLAutoReplaceUserDefault shareInstance].isUseAutoReIndent) {
+            if (![sSelf.settingWC isUseAutoReIntent]) {
                 return incomingEvent;
             }
             
@@ -132,7 +133,7 @@ static MLAutoReplace *sharedPlugin;
         }else if ([incomingEvent type] == NSKeyDown && [incomingEvent keyCode] == kVK_ANSI_Backslash
                   && (incomingEvent.modifierFlags&kCGEventFlagMaskControl)&&(incomingEvent.modifierFlags&kCGEventFlagMaskCommand)&&(incomingEvent.modifierFlags&kCGEventFlagMaskAlternate)) {
             //Control+Alt+Command+|  快捷键重载plist
-            [self.settingWC reloadPlist:nil]; //简单调用下WC的方法即可
+            [sSelf.settingWC reloadPlist:nil]; //简单调用下WC的方法即可
         }
         return incomingEvent;
     }];

@@ -10,6 +10,8 @@
 
 @interface SettingWindowController : NSWindowController
 
+@property (nonatomic, assign, readonly) BOOL isUseAutoReIntent;
+
 - (IBAction)reloadPlist:(id)sender;
 
 @end
