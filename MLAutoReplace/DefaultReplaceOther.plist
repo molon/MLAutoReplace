@@ -118,39 +118,15 @@
 	</dict>
 	<dict>
 		<key>regex</key>
-		<string>^\s*@property\s*\(\s*nonatomic\s*,\s*strong\s*\)\s*NSArray\s*&lt;\s*\w+\s*&gt;$</string>
+		<string>^\s*@property\s*\(\s*nonatomic\s*(,\s*strong\s*|)\)\s*(NSArray|NSMutableArray|NSSet|NSMutableSet)\s*&lt;\s*(\w+)\s*&gt;$</string>
 		<key>replaceContent</key>
-		<string>@property (nonatomic, strong) NSArray&lt;&lt;current_protocol&gt; *&gt; &lt;&lt;current_protocol&gt;&gt; *</string>
+		<string>@property (nonatomic&lt;{0}&gt;) &lt;{1}&gt;&lt;&lt;{2}&gt; *&gt;&lt;&lt;{2}&gt;&gt; *&lt;#name#&gt;</string>
 	</dict>
 	<dict>
 		<key>regex</key>
-		<string>^\s*@property\s*\(\s*nonatomic\s*,\s*strong\s*\)\s*NSMutableArray\s*&lt;\s*\w+\s*&gt;$</string>
+		<string>^\s*@property\s*\(\s*nonatomic\s*(,\s*strong\s*|)\)\s*(NSDictionary|NSMutableDictionary)\s*&lt;\s*(\w+)\s*&gt;$</string>
 		<key>replaceContent</key>
-		<string>@property (nonatomic, strong) NSMutableArray&lt;&lt;current_protocol&gt; *&gt; &lt;&lt;current_protocol&gt;&gt; *</string>
-	</dict>
-	<dict>
-		<key>regex</key>
-		<string>^\s*@property\s*\(\s*nonatomic\s*,\s*strong\s*\)\s*NSDictionary\s*&lt;\s*\w+\s*&gt;$</string>
-		<key>replaceContent</key>
-		<string>@property (nonatomic, strong) NSDictionary&lt;NSString *,&lt;current_protocol&gt; *&gt; &lt;&lt;current_protocol&gt;&gt; *</string>
-	</dict>
-	<dict>
-		<key>regex</key>
-		<string>^\s*@property\s*\(\s*nonatomic\s*,\s*strong\s*\)\s*NSMutableDictionary\s*&lt;\s*\w+\s*&gt;$</string>
-		<key>replaceContent</key>
-		<string>@property (nonatomic, strong) NSMutableDictionary&lt;NSString *,&lt;current_protocol&gt; *&gt; &lt;&lt;current_protocol&gt;&gt; *</string>
-	</dict>
-	<dict>
-		<key>regex</key>
-		<string>^\s*@property\s*\(\s*nonatomic\s*,\s*strong\s*\)\s*NSSet\s*&lt;\s*\w+\s*&gt;$</string>
-		<key>replaceContent</key>
-		<string>@property (nonatomic, strong) NSSet&lt;&lt;current_protocol&gt; *&gt; &lt;&lt;current_protocol&gt;&gt; *</string>
-	</dict>
-	<dict>
-		<key>regex</key>
-		<string>^\s*@property\s*\(\s*nonatomic\s*,\s*strong\s*\)\s*NSMutableSet\s*&lt;\s*\w+\s*&gt;$</string>
-		<key>replaceContent</key>
-		<string>@property (nonatomic, strong) NSMutableSet&lt;&lt;current_protocol&gt; *&gt; &lt;&lt;current_protocol&gt;&gt; *</string>
+		<string>@property (nonatomic&lt;{0}&gt;) &lt;{1}&gt;&lt;NSString *,&lt;{2}&gt; *&gt;&lt;&lt;{2}&gt;&gt; *&lt;#name#&gt;</string>
 	</dict>
 </array>
 </plist>

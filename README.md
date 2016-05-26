@@ -10,6 +10,7 @@ You can use shortcut key `Shift+Command+\` to auto re-indent all source of the c
 You can custom other replacer with regex.  
 ![regex replace](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceOther.gif)  
 ![regex replace](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceTS.gif)  
+![pseudo-generic](https://raw.githubusercontent.com/molon/MLAutoReplace/master/pseudo-generic.gif)
 
 You can input common getter quickly.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/replaceGetter.gif)  
@@ -34,18 +35,39 @@ This item means that plugin will replace `@s/` to `@property (nonatomic, strong)
 
 The plugin will detect the content of current input line.  
 
-Some placeholder can be replace with context.
+Some placeholders can be replace with context.
 
 - `<datetime>`: current datetime, you can use it to mark your edit time.
 - `<declare_class_below>`: the class name of the first `@interface XXX :` below.
-- `<current_protocol>`: the protocol name in current line.
+- `<{0}>`,`<{1}>`...: these placeholders will be replaced with its corresponding position of regex result.
 
 A demo for pseudo-generic:
-
 ![pseudo-generic](https://raw.githubusercontent.com/molon/MLAutoReplace/master/pseudo-generic.gif)
+
+It uses two styles of placeholders:
+
+`<declare_class_below>`: 
+
+```
+regex: ^\s*@[Pp]{2}$
+replaceContent: @protocol <declare_class_below>;
+```
+
+`<{0}>`,`<{1}>`(location placeholders):
+
+```
+regex: ^\s*@property\s*\(\s*nonatomic\s*(,\s*strong\s*|)\)\s*(NSArray|NSMutableArray|NSSet|NSMutableSet)\s*<\s*(\w+)\s*>$
+replaceContent: @property (nonatomic<{0}>) <{1}><<{2}> *><<{2}>> *<#name#>
+
+regex: ^\s*@property\s*\(\s*nonatomic\s*(,\s*strong\s*|)\)\s*(NSDictionary|NSMutableDictionary)\s*<\s*(\w+)\s*>$
+replaceContent: @property (nonatomic<{0}>) <{1}><NSString *,<{2}> *><<{2}>> *<#name#>
+
+```
 
 
 ##Getter replacer
+
+**In fact, this feature can be implemented with location placeholders. But I am not willing to delete the old feature.**
 
 You need add your own common syntax to the getter replacer.  
 ![replace getter](https://raw.githubusercontent.com/molon/MLAutoReplace/master/addReplaceGetter.gif)  

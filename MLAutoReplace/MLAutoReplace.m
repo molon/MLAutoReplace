@@ -431,13 +431,21 @@ static MLAutoReplace *sharedPlugin;
             replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<declare_class_below>" withString:array[0]];
         }
         
-        if ([replaceContent rangeOfString:@"<current_protocol>"].location!=NSNotFound) {
-            //探测其是否满足CLS<XXX>这样的格式，满足的话就拎出来XXX,XXX呢又不能带*
-            NSArray *array = [currentLine vvv_stringsByExtractingGroupsUsingRegexPattern:@"\\w+\\s*<\\s*(\\w+)\\s*>"];
+        if ([replaceContent vvv_matchesPatternRegexPattern:@"\\<\\{\\d+\\}\\>"]) {
+            //有位置占位符
+            NSArray *array = [currentLine vvv_stringsByExtractingGroupsUsingRegexPattern:regex];
             if (array.count<=0) {
                 continue;
             }
-            replaceContent = [replaceContent stringByReplacingOccurrencesOfString:@"<current_protocol>" withString:array[0]];
+            //ok 我们挨个去替换
+            for (NSInteger i=0; i<array.count; i++) {
+                NSString *element = array[i];
+                replaceContent = [replaceContent stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"<{%ld}>",i] withString:element];
+            }
+            //替换完了，但是还是发现有没找到的，就肯定还是有问题就啥也不做。
+            if ([replaceContent vvv_matchesPatternRegexPattern:@"\\<\\{\\d+\\}\\>"]) {
+                continue;
+            }
         }
         
         //按键以完成替换
