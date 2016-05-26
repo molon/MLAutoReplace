@@ -18,14 +18,6 @@ You can input common getter quickly.
 ##How to install?
 Download this project and run.  
 
-##Re-Indent
-
-Just can be quickly re-intent. 
-
-If you find that press `Shift+Command+\` does nothing.   
-Please ensure that the shortcut key setting of Re-Intent is default.
-![re-intent shortcut key setting](https://raw.githubusercontent.com/molon/MLAutoReplace/master/re-intent-setting.png) 
-
 ##Regex replacer
 
 Exmple:  
@@ -42,6 +34,7 @@ Some placeholders can be replace with context.
 - `<{0}>`,`<{1}>`...: these placeholders will be replaced with its corresponding position of regex result.
 
 A demo for pseudo-generic:
+
 ![pseudo-generic](https://raw.githubusercontent.com/molon/MLAutoReplace/master/pseudo-generic.gif)
 
 It uses two styles of placeholders:
@@ -64,6 +57,13 @@ replaceContent: @property (nonatomic<{0}>) <{1}><NSString *,<{2}> *><<{2}>> *<#n
 
 ```
 
+##Re-Indent
+
+Just can be quickly re-intent. 
+
+If you find that press `Shift+Command+\` does nothing.   
+Please ensure that the shortcut key setting of Re-Intent is default.
+![re-intent shortcut key setting](https://raw.githubusercontent.com/molon/MLAutoReplace/master/re-intent-setting.png) 
 
 ##Getter replacer
 
