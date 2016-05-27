@@ -114,7 +114,8 @@
 		<key>regex</key>
 		<string>^\s*@[Pp]{2}$</string>
 		<key>replaceContent</key>
-		<string>@protocol &lt;declare_class_below&gt;;</string>
+		<string>@protocol &lt;declare_class_below&gt;
+@end</string>
 	</dict>
 	<dict>
 		<key>regex</key>
