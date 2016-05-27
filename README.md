@@ -33,7 +33,7 @@ Some placeholders can be replace with context.
 - `<declare_class_below>`: the class name of the first `@interface XXX :` below.
 - `<{0}>`,`<{1}>`...: these placeholders will be replaced with its corresponding position of regex result.
 
-A demo for pseudo-generic:
+A demo for pseudo-generic(https://github.com/ibireme/YYModel/issues/79):
 
 ![pseudo-generic](https://raw.githubusercontent.com/molon/MLAutoReplace/master/pseudo-generic.gif)
 
