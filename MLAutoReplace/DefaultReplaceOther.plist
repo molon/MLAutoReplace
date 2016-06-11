@@ -129,5 +129,29 @@
 		<key>replaceContent</key>
 		<string>@property (nonatomic&lt;{0}&gt;) &lt;{1}&gt;&lt;NSString *,&lt;{2}&gt; *&gt;&lt;&lt;{2}&gt;&gt; *&lt;#name#&gt;</string>
 	</dict>
+	<dict>
+		<key>regex</key>
+		<string>([^\s]{1}.*)(NSArray|NSMutableArray|NSSet|NSMutableSet)\s*&lt;\s*(\w+)\s*&gt;(\]|)$</string>
+		<key>replaceContent</key>
+		<string>&lt;{0}&gt;&lt;{1}&gt;&lt;&lt;{2}&gt; *&gt;&lt;&lt;{2}&gt;&gt; </string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*(NSArray|NSMutableArray|NSSet|NSMutableSet)\s*&lt;\s*(\w+)\s*&gt;$</string>
+		<key>replaceContent</key>
+		<string>&lt;{0}&gt;&lt;&lt;{1}&gt; *&gt;&lt;&lt;{1}&gt;&gt; *</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>([^\s]{1}.*)(NSDictionary|NSMutableDictionary)\s*&lt;\s*(\w+)\s*&gt;(\]|)$</string>
+		<key>replaceContent</key>
+		<string>&lt;{0}&gt;&lt;{1}&gt;&lt;NSString *,&lt;{2}&gt; *&gt;&lt;&lt;{2}&gt;&gt; </string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*(NSDictionary|NSMutableDictionary)\s*&lt;\s*(\w+)\s*&gt;$</string>
+		<key>replaceContent</key>
+		<string>&lt;{0}&gt;&lt;NSString *,&lt;{1}&gt; *&gt;&lt;&lt;{1}&gt;&gt; *</string>
+	</dict>
 </array>
 </plist>
