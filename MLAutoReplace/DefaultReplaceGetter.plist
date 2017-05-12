@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>UIButton*</key>
-	<string>- (UIButton *)&lt;name&gt;
-{
+	<string>- (UIButton *)&lt;name&gt; {
     if (!_&lt;name&gt;) {
 		UIButton *button = [[UIButton alloc]init];
 		[button setTitle:@&quot;&lt;#title#&gt;&quot; forState:UIControlStateNormal];
@@ -19,8 +18,7 @@
 }
 </string>
 	<key>UIImageView*</key>
-	<string>- (UIImageView *)&lt;name&gt;
-{
+	<string>- (UIImageView *)&lt;name&gt; {
     if (!_&lt;name&gt;) {
 		UIImageView *imageView = [[UIImageView alloc]init];
         imageView.image = [UIImage imageNamed:@&quot;&lt;#imageName#&gt;&quot;];
@@ -33,8 +31,7 @@
 }
 </string>
 	<key>UILabel*</key>
-	<string>- (UILabel *)&lt;name&gt;
-{
+	<string>- (UILabel *)&lt;name&gt; {
     if (!_&lt;name&gt;) {
         UILabel* label = [[UILabel alloc]init];
         label.backgroundColor = [UIColor clearColor];
@@ -49,8 +46,7 @@
 }
 </string>
 	<key>UITableView*</key>
-	<string>- (UITableView *)&lt;name&gt;
-{
+	<string>- (UITableView *)&lt;name&gt; {
 	if (!_&lt;name&gt;) {
 		UITableView *tableView = [[UITableView alloc]init];
         tableView.delegate = self;

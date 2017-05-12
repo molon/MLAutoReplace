@@ -324,7 +324,7 @@ static MLAutoReplace *sharedPlugin;
     //根据type找到对应的替换文本
     NSString *replaceContent =  nil;
     
-    NSString * const defaultReplaceGetterOfScalar = @"{\n\t<#custom#>\n}\n";
+    NSString * const defaultReplaceGetterOfScalar = @"\t<#custom#>\n}\n";
     
     NSString * replaceGetter = nil;
     @synchronized(self.replaceGetters){ //简单同步
@@ -335,7 +335,7 @@ static MLAutoReplace *sharedPlugin;
     }else{
         NSString *replaceGetter = defaultReplaceGetterOfScalar;
         if ([type hasSuffix:@"*"]||[type isEqualToString:@"id"]) {
-            NSString * const defaultReplaceGetterOfPointer = @"{\n\tif (!_<name>) {%@\n\t\t<#custom#>\n\t}\n\treturn _<name>;\n}\n";
+            NSString * const defaultReplaceGetterOfPointer = @"\tif (!_<name>) {%@\n\t\t<#custom#>\n\t}\n\treturn _<name>;\n}\n";
             NSString *otherContent = @"";
             if ([type hasSuffix:@"*"]) {
                 NSString *typeWithoutStar = [[type substringToIndex:type.length-1]stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -345,7 +345,7 @@ static MLAutoReplace *sharedPlugin;
             }
             replaceGetter = [NSString stringWithFormat:defaultReplaceGetterOfPointer,otherContent];
         }
-        replaceContent = [[NSString stringWithFormat:@"- (%@)<name>\n%@",type,replaceGetter] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
+        replaceContent = [[NSString stringWithFormat:@"- (%@)<name> {\n%@",type,replaceGetter] stringByReplacingOccurrencesOfString:@"<name>" withString:name];
     }
     
     if ([NSString IsNilOrEmpty:replaceContent]) {
@@ -392,9 +392,7 @@ static MLAutoReplace *sharedPlugin;
     @synchronized(self.replaceOthers){ //简单同步
         finalReplaceOthers = [self.replaceOthers mutableCopy];
     }
-    if (finalReplaceOthers) {
-        [finalReplaceOthers addObjectsFromArray:defaultArray];
-    }else{
+    if (finalReplaceOthers.count<=0) {
         finalReplaceOthers = [defaultArray mutableCopy];
     }
     for (NSDictionary *aRegexDict in finalReplaceOthers) {

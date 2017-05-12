@@ -30,8 +30,7 @@
 		<key>regex</key>
 		<string>^\s*-\s*\(\s*id\s*\)\s*init\s*//$</string>
 		<key>replaceContent</key>
-		<string>- (instancetype)init
-{
+		<string>- (instancetype)init {
     self = [super init];
     if (self) {
         &lt;#statements#&gt;
@@ -43,8 +42,7 @@
 		<key>regex</key>
 		<string>^\s*-\s*\(\s*instancetype\s*\)\s*init\s*//$</string>
 		<key>replaceContent</key>
-		<string>- (instancetype)init
-{
+		<string>- (instancetype)init {
     self = [super init];
     if (self) {
         &lt;#statements#&gt;
@@ -56,8 +54,7 @@
 		<key>regex</key>
 		<string>^\s*--ts$</string>
 		<key>replaceContent</key>
-		<string>- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+		<string>- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 0;
 }
 
@@ -84,8 +81,7 @@
     return &lt;#44.0f#&gt;;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     &lt;#custom#&gt;
@@ -152,6 +148,18 @@
 		<string>^\s*(NSDictionary|NSMutableDictionary)\s*&lt;\s*(\w+)\s*&gt;$</string>
 		<key>replaceContent</key>
 		<string>&lt;{0}&gt;&lt;NSString *,&lt;{1}&gt; *&gt;&lt;&lt;{1}&gt;&gt; *</string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*-\s*\(\s*instancetype\s*\)\s*initWithFrame\:\(CGRect\)frame\s*//$</string>
+		<key>replaceContent</key>
+		<string>- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        &lt;#custom#&gt;
+    }
+    return self;
+}</string>
 	</dict>
 </array>
 </plist>
