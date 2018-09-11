@@ -18,7 +18,10 @@
 
 static MLAutoReplace *sharedPlugin;
 
-#define kSourceTextViewClass NSClassFromString(@"DVTSourceTextView")
+static BOOL isSourceTextViewClass(id obj) {
+    return [obj isKindOfClass:NSClassFromString(@"DVTSourceTextView")]||
+    [obj isKindOfClass:NSClassFromString(@"IDESourceEditor.IDESourceEditorView")];
+}
 
 @interface MLAutoReplace()
 
@@ -95,10 +98,14 @@ static MLAutoReplace *sharedPlugin;
                 return incomingEvent;
             }
             
-            if (![incomingEvent.window.firstResponder isKindOfClass:kSourceTextViewClass]) {
+            if (!isSourceTextViewClass(incomingEvent.window.firstResponder)) {
                 return incomingEvent;
             }
             
+            // 不是NSTextView就没必要继续，新版本Xcode有改动
+            if (![incomingEvent.window.firstResponder isKindOfClass:[NSTextView class]]) {
+                return incomingEvent;
+            }
             NSTextView *textView = (NSTextView *)incomingEvent.window.firstResponder;
             
             DLOG(@"按了shift+command+|,window:%@，windowNumber:%ld，并且执行自动re-indent",incomingEvent.window,incomingEvent.windowNumber);
@@ -263,7 +270,12 @@ static MLAutoReplace *sharedPlugin;
         return;
     }
     
-    if (![[noti object] isKindOfClass:kSourceTextViewClass]) {
+    if (!isSourceTextViewClass([noti object])) {
+        return;
+    }
+    
+    // 不是NSTextView就没必要继续，新版本Xcode有改动
+    if (![[noti object]isKindOfClass:[NSTextView class]]) {
         return;
     }
     
